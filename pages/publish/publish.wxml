@@ -1,0 +1,9 @@
+<!--pages/publish/publish.wxml-->
+
+<view class="container">
+    <text>pages/publish/publish.wxml</text>
+    <text>Under Construction</text>
+
+    <import src="../../tabbar.wxml" />
+    <template is="tabBar" data="{{tabBar}}" />
+</view>
