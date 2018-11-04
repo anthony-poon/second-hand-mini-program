@@ -1,0 +1,14 @@
+<!--pages/coming/coming.wxml-->
+
+
+<view class="page__bd">
+    <view class="page__bd_spacing">.
+        <view class="container">
+            <text>pages/coming/coming.wxml</text>
+            <text>Under Construction</text>
+        </view>
+    </view>
+
+    <import src="../../tabbar.wxml"/>
+    <template is="tabBar" data="{{tabBar}}"/>
+</view>

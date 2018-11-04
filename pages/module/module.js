@@ -8,7 +8,7 @@ Page({
    * Page initial data
    */
   data: {
-    id: "",
+    moduleId: "",
     moduleName: "",
     inputShowed: false,
     inputVal: "",
@@ -40,7 +40,7 @@ Page({
         });
     },
 
-    getStorefronts: function () {
+    getStorefronts: function (moduleId) {
         var storefronts = [
             { "id": 1, "name": "ABC Co. Ltd.", "img": "../../images/nothing.png"},
             { "id": 2, "name": "DEF Co. Ltd.", "img": "../../images/nothing.png"},
@@ -73,11 +73,11 @@ Page({
 //        });
 
         this.setData({
-            id: options.id,
+            moduleId: options.moduleId,
             moduleName: options.moduleName
         });
 
-        this.getStorefronts();
+        this.getStorefronts(this.data.moduleId);
   },
 
   /**

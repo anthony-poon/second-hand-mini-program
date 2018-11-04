@@ -38,12 +38,13 @@ App({
     var _curPageArr = getCurrentPages();
     var _curPage = _curPageArr[_curPageArr.length - 1];
     var _pagePath = _curPage.__route__;
-    var openedPages = this.globalData.openedPages;
-    openedPages.push(_pagePath);
+
     if (_pagePath.indexOf('/') != 0) {
       _pagePath = '/' + _pagePath;
     }
     var tabBar = this.globalData.tabBar;
+
+    //TODO: none of the tab bar is active when path is not in tab bar list
     for (var i = 0; i < tabBar.list.length; i++) {
       tabBar.list[i].active = false;
       if (tabBar.list[i].pagePath == _pagePath) {
@@ -54,12 +55,11 @@ App({
       tabBar: tabBar
     });
 
-    console.log(openedPages)
+    console.log("Current Pages: ", _curPageArr);
 
   },
   globalData: {
     userInfo: null,
-    openedPages: [],
     tabBar: {
       color: "#a9b7b7",
       selectedColor: "#ff8124",
@@ -71,6 +71,7 @@ App({
           text: "首页",
           class: "menu-item",
           selected: false,
+          opened: false
         },
         {
           selectedIconPath: "../../images/coming-active.png",
@@ -78,7 +79,8 @@ App({
           pagePath: "/pages/publish/publish",
           text: "发布",
           class: "menu-item",
-          selected: false
+          selected: false,
+          opened: false
         },
         {
           selectedIconPath: "../../images/coming.png",
@@ -86,7 +88,8 @@ App({
           pagePath: "/pages/user/user",
           text: "我的",
           class: "menu-item",
-          selected: false
+          selected: false,
+          opened: false
         }
       ],
       position: "bottom"
