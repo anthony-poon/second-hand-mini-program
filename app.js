@@ -1,6 +1,16 @@
 //app.js
+
+/** 
+ * TODO LIST
+ * - space between products?
+ * - templates
+ * - separate session for tabs
+ * - search bar implementation <-- create cache repo to speed up
+ * - sort storefronts in backend before passing back to frontend
+**/
+
 App({
-  onLaunch: function() {
+  onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -34,16 +44,17 @@ App({
 
   //TODO: implement correct change tab method by keeping alive
 
-  editTabBar: function() {
+  editTabBar: function () {
     var _curPageArr = getCurrentPages();
     var _curPage = _curPageArr[_curPageArr.length - 1];
     var _pagePath = _curPage.__route__;
-    var openedPages = this.globalData.openedPages;
-    openedPages.push(_pagePath);
+
     if (_pagePath.indexOf('/') != 0) {
       _pagePath = '/' + _pagePath;
     }
     var tabBar = this.globalData.tabBar;
+
+    //TODO: none of the tab bar is active when path is not in tab bar list
     for (var i = 0; i < tabBar.list.length; i++) {
       tabBar.list[i].active = false;
       if (tabBar.list[i].pagePath == _pagePath) {
@@ -54,40 +65,42 @@ App({
       tabBar: tabBar
     });
 
-    console.log(openedPages)
+    console.log("Current Pages: ", _curPageArr);
 
   },
   globalData: {
     userInfo: null,
-    openedPages: [],
     tabBar: {
       color: "#a9b7b7",
       selectedColor: "#ff8124",
       borderStyle: "white",
       list: [{
-          selectedIconPath: "../../images/ing-active.png",
-          iconPath: "../../images/ing.png",
-          pagePath: "/pages/main/main",
-          text: "首页",
-          class: "menu-item",
-          selected: false,
-        },
-        {
-          selectedIconPath: "../../images/coming-active.png",
-          iconPath: "../../images/coming.png",
-          pagePath: "/pages/publish/publish",
-          text: "发布",
-          class: "menu-item",
-          selected: false
-        },
-        {
-          selectedIconPath: "../../images/coming.png",
-          iconPath: "../../images/coming.png",
-          pagePath: "/pages/user/user",
-          text: "我的",
-          class: "menu-item",
-          selected: false
-        }
+        selectedIconPath: "../../images/ing-active.png",
+        iconPath: "../../images/ing.png",
+        pagePath: "/pages/main/main",
+        text: "首页",
+        class: "menu-item",
+        selected: false,
+        opened: false
+      },
+      {
+        selectedIconPath: "../../images/coming-active.png",
+        iconPath: "../../images/coming.png",
+        pagePath: "/pages/publish/publish",
+        text: "发布",
+        class: "menu-item",
+        selected: false,
+        opened: false
+      },
+      {
+        selectedIconPath: "../../images/coming.png",
+        iconPath: "../../images/coming.png",
+        pagePath: "/pages/user/user",
+        text: "我的",
+        class: "menu-item",
+        selected: false,
+        opened: false
+      }
       ],
       position: "bottom"
     }

@@ -1,3 +1,5 @@
+
+<!-- TODO: Convert duplicate pages to template -->
 <template name="tabBar">
 
     <view class="tab-bar"
@@ -6,7 +8,7 @@
         <block wx:for="{{tabBar.list}}" wx:key="pagePath">
 
             <!-- TODO: Implement correct open type -->
-            <navigator url="{{item.pagePath}}" open-type="{{changeTab(item.pagePath) ? 'navigateBack' : 'navigate'}}" class="{{item.class}}"
+            <navigator url="{{item.pagePath}}" open-type="redirect" class="{{item.class}}"
                        style="{{item.active? 'color: '+(item.selectedColor? item.selectedColor : tabBar.selectedColor) : ''}}">
 
                 <image src="{{item.selectedIconPath}}" wx:if="{{item.active}}" class="tabBar-img"></image>
