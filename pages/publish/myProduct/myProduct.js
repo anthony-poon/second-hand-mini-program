@@ -1,4 +1,4 @@
-// pages/user/user.js
+// pages/product/product.js
 
 const app = getApp();
 
@@ -7,13 +7,50 @@ Page({
     /**
      * Page initial data
      */
-    data: {},
+    data: {
+        productId: "",
+        productName: "",
+        productDetails: {}
+    },
+
+    getProductDetails: function () {
+        var productDetails =
+            {
+                "id": 1,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 5000.0,
+                "visitCount": 1231,
+                "img": [
+                    "/images/emma.jpg"
+                ]
+            }
+
+        this.setData({
+            productDetails: productDetails
+        });
+    },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
         app.editTabBar();
+
+        console.log(options);
+
+        //        wx.showLoading({
+        //            title: '加载中'
+        //        });
+
+        this.setData({
+            productId: options.productId,
+            productName: options.productName
+        });
+
+        this.getProductDetails();
+
+        console.log("Product Details: ", this.data.productDetails);
     },
 
     /**

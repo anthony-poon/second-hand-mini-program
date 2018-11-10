@@ -1,0 +1,45 @@
+<!--pages/main/main.wxml-->
+
+<view class="page">
+    <view class="page_hd page__hd_spacing">
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">切換城市</view>
+            </view>
+            <view class="weui-cell__bd">
+                <picker bindchange="bindCityChange" value="{{globalData.cityId}}" range="{{cities}}">
+                    <view class="weui-select weui-select_in-select-after highlight-text">{{cities[cityId]}}</view>
+                </picker>
+            </view>
+        </view>
+    </view>
+
+    <view class="page__bd">
+        <view class="weui-grids">
+            <block wx:for="{{modules}}" wx:key="*this">
+                <navigator url="/pages/browse/module/module?moduleId={{item.id}}&moduleName={{item.title}}"
+                           open-type="navigate"
+                           class="weui-grid grid-module" hover-class="weui-grid_active">
+                    <image class="weui-grid__icon grid-icon-module" src="{{item.img}}"/>
+                    <view class="weui-grid__label">{{item.title}}</view>
+                </navigator>
+            </block>
+        </view>
+    </view>
+
+    <!-- TODO: implement login functionality -->
+    <view class="container">
+        <!--wxml-->
+        <!-- If only the user's profile photo/nickname is required, "<open-data />" can be used -->
+        <open-data type="userAvatarUrl"></open-data>
+        <open-data type="userNickName"></open-data>
+        <!-- Requires to use button to authorize the login attempts -->
+        <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">Authorize login</button>
+        <view wx:else>Please upgrade WeChat version</view>
+    </view>
+
+    <!-- TODO: implement nested view by import templates -->
+    <import src="/tabbar.wxml"/>
+    <template is="tabBar" data="{{tabBar}}"/>
+
+</view>

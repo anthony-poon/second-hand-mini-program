@@ -42,16 +42,16 @@ Page({
 
     getStorefronts: function (moduleId) {
         var storefronts = [
-            { "id": 1, "name": "ABC Co. Ltd.", "img": "../../images/nothing.png"},
-            { "id": 2, "name": "DEF Co. Ltd.", "img": "../../images/nothing.png"},
-            { "id": 3, "name": "GHI Co. Ltd.", "img": "../../images/nothing.png"},
-            { "id": 4, "name": "JKL Co. Ltd.", "img": "../../images/nothing.png"},
-            { "id": 5, "name": "MNO Co. Ltd.", "img": "../../images/nothing.png"},
-            { "id": 6, "name": "PQR Co. Ltd.", "img": "../../images/nothing.png"},
-            { "id": 7, "name": "STU Co. Ltd.", "img": "../../images/nothing.png"},
-            { "id": 8, "name": "VWX Co. Ltd.", "img": "../../images/nothing.png"},
-            { "id": 9, "name": "YYY Co. Ltd.", "img": "../../images/nothing.png"},
-            { "id": 10, "name": "ZZZ Co. Ltd.", "img": "../../images/nothing.png"}
+            { "id": 1, "name": "ABC Co. Ltd.", "img": "/images/nothing.png"},
+            { "id": 2, "name": "DEF Co. Ltd.", "img": "/images/nothing.png"},
+            { "id": 3, "name": "GHI Co. Ltd.", "img": "/images/nothing.png"},
+            { "id": 4, "name": "JKL Co. Ltd.", "img": "/images/nothing.png"},
+            { "id": 5, "name": "MNO Co. Ltd.", "img": "/images/nothing.png"},
+            { "id": 6, "name": "PQR Co. Ltd.", "img": "/images/nothing.png"},
+            { "id": 7, "name": "STU Co. Ltd.", "img": "/images/nothing.png"},
+            { "id": 8, "name": "VWX Co. Ltd.", "img": "/images/nothing.png"},
+            { "id": 9, "name": "YYY Co. Ltd.", "img": "/images/nothing.png"},
+            { "id": 10, "name": "ZZZ Co. Ltd.", "img": "/images/nothing.png"}
         ];
 
         this.setData({

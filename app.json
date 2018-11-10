@@ -1,20 +1,23 @@
 {
-    "pages": [
-        "pages/main/main",
-        "pages/index/index",
-        "pages/logs/logs",
-        "pages/module/module",
-        "pages/storefront/storefront",
-        "pages/product/product",
-        "pages/publish/publish",
-        "pages/user/user",
-        "pages/coming/coming"
-    ],
-    "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "CASPAR IS AWESOME!",
-        "navigationBarTextStyle": "black",
-        "enablePullDownRefresh": false
-    }
+  "pages": [
+    "pages/browse/main/main",
+    "pages/browse/index/index",
+    "pages/logs/logs",
+    "pages/browse/module/module",
+    "pages/browse/storefront/storefront",
+    "pages/browse/product/product",
+    "pages/publish/publish",
+    "pages/publish/main/main",
+    "pages/publish/myProductList/myProductList",
+    "pages/publish/myProduct/myProduct",
+    "pages/user/user",
+    "pages/coming/coming"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "CASPAR IS AWESOME!",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false
+  }
 }

@@ -9,7 +9,7 @@
         <view class="weui-panel weui-panel_access" >
             <view class="weui-panel__hd">Products</view>
             <view class="weui-panel__bd" wx:for="{{products}}" wx:key="*this">
-                <navigator url="/pages/product/product?productId={{item.id}}&productName={{item.name}}" 
+                <navigator url="/pages/browse/product/product?productId={{item.id}}&productName={{item.name}}"
                             class="weui-media-box weui-media-box_appmsg media-box-border" 
                             hover-class="weui-cell_active">
                     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
@@ -31,7 +31,7 @@
     </view>
 
 
-    <import src="../../tabbar.wxml" />
+    <import src="/tabbar.wxml" />
     <template is="tabBar" data="{{tabBar}}" />
 
 </view>

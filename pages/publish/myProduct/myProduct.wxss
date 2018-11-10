@@ -1,0 +1,6 @@
+/* pages/product/product.wxss */
+
+.swiper-large {
+    width: 200px;
+    height: 500px;
+}

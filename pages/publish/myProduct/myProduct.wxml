@@ -1,0 +1,59 @@
+<!--pages/product/product.wxml-->
+
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">Product Details</view>
+    </view>
+
+    <view class="page__bd">
+
+        <view class="weui-form-preview">
+            <view class="weui-form-preview__hd">
+                <swiper indicator-dots="true">
+                    <block wx:for="{{productDetails.img}}" wx:key="*this">
+                        <swiper-item class="swiper-large"> 
+                            <image src="{{item}}" mode="aspectFit"></image>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </view>
+
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">商品</view>
+                    <view class="weui-form-preview__value_in-hd">{{productDetails.name}}</view>
+                </view>
+            </view>
+
+            <view class="weui-form-preview__bd">
+
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">描述</view>
+                    <view class="weui-form-preview__value">{{productDetails.desc}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">金额</view>
+                    <view class="weui-form-preview__value">¥{{productDetails.price}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">浏览量</view>
+                    <view class="weui-form-preview__value">{{productDetails.visitCount}}</view>
+                </view>
+            </view>
+
+            <view class="weui-form-preview__ft">
+                <navigator url="" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">Contact Seller</navigator>
+            </view>
+
+        </view>
+    </view>
+
+
+    <import src="/tabbar.wxml" />
+    <template is="tabBar" data="{{tabBar}}" />
+
+
+
+</view>
+
+
