@@ -21,7 +21,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": "/images/nothing.png"
+                "img": ["/images/iphone.jpg"]
             },
             {
                 "id": 2,
@@ -29,7 +29,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": "/images/nothing.png"
+                "img": ["/images/iphone.jpg"]
             },
             {
                 "id": 3,
@@ -37,7 +37,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": "/images/nothing.png"
+                "img": ["/images/iphone.jpg"]
             },
             {
                 "id": 4,
@@ -45,7 +45,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": "/images/nothing.png"
+                "img": ["/images/iphone.jpg"]
             },
             {
                 "id": 5,
@@ -53,7 +53,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": "/images/nothing.png"
+                "img": ["/images/iphone.jpg"]
             },
             {
                 "id": 6,
@@ -61,7 +61,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": "/images/nothing.png"
+                "img": ["/images/iphone.jpg"]
             },
             {
                 "id": 7,
@@ -69,7 +69,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": "/images/nothing.png"
+                "img": ["/images/iphone.jpg"]
             },
             {
                 "id": 8,
@@ -77,7 +77,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": "/images/nothing.png"
+                "img": ["/images/iphone.jpg"]
             },
             {
                 "id": 9,
@@ -85,7 +85,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": "/images/nothing.png"
+                "img": ["/images/iphone.jpg"]
             },
             {
                 "id": 10,
@@ -93,7 +93,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": "/images/nothing.png"
+                "img": ["/images/iphone.jpg"]
             },
             {
                 "id": 11,
@@ -101,7 +101,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": "/images/nothing.png"
+                "img": ["/images/iphone.jpg"]
             },
             {
                 "id": 12,
@@ -109,7 +109,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": "/images/nothing.png"
+                "img": ["/images/iphone.jpg"]
             },
             {
                 "id": 13,
@@ -117,7 +117,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": "/images/nothing.png"
+                "img": ["/images/iphone.jpg"]
             }
         ];
 

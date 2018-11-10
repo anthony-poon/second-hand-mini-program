@@ -1,21 +1,32 @@
-<!--pages/product/product.wxml-->
+
 
 <view class="page">
+
     <view class="page__hd">
         <view class="page__title">Product Details</view>
     </view>
 
     <view class="page__bd">
 
+        <view class="swiper-container">
+            <swiper class="swiper_box" bindchange="swiperchange">
+                <block wx:for="{{productDetails.img}}" wx:key="id">
+                    <swiper-item>
+                        <image src="{{item}}" mode="aspectFit"></image>
+                    </swiper-item>
+                </block>
+            </swiper>
+            <view class="dots">
+                <block wx:for="{{productDetails.img}}" wx:key="unique">
+                    <view wx:if="{{productDetails.img.length > 1}}"
+                          class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+                </block>
+            </view>
+        </view>
+
         <view class="weui-form-preview">
             <view class="weui-form-preview__hd">
-                <swiper indicator-dots="true">
-                    <block wx:for="{{productDetails.img}}" wx:key="*this">
-                        <swiper-item class="swiper-large"> 
-                            <image src="{{item}}" mode="aspectFit"></image>
-                        </swiper-item>
-                    </block>
-                </swiper>
+
             </view>
 
             <view class="weui-form-preview__hd">
@@ -42,16 +53,17 @@
             </view>
 
             <view class="weui-form-preview__ft">
-                <navigator url="" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">Contact Seller</navigator>
+                <navigator url="" class="weui-form-preview__btn weui-form-preview__btn_primary"
+                           hover-class="weui-form-preview__btn_active">Contact Seller
+                </navigator>
             </view>
 
         </view>
     </view>
 
 
-    <import src="/tabbar.wxml" />
-    <template is="tabBar" data="{{tabBar}}" />
-
+    <import src="/tabbar.wxml"/>
+    <template is="tabBar" data="{{tabBar}}"/>
 
 
 </view>

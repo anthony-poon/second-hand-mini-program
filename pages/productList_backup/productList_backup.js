@@ -19,9 +19,9 @@ Page({
                 "id": 1,
                 "name": "iPhone 7 Plus",
                 "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 9999.0,
+                "price": 5000.0,
                 "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
+                "img": "/images/nothing.png"
             },
             {
                 "id": 2,
@@ -29,7 +29,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
+                "img": "/images/nothing.png"
             },
             {
                 "id": 3,
@@ -37,7 +37,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
+                "img": "/images/nothing.png"
             },
             {
                 "id": 4,
@@ -45,7 +45,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
+                "img": "/images/nothing.png"
             },
             {
                 "id": 5,
@@ -53,7 +53,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
+                "img": "/images/nothing.png"
             },
             {
                 "id": 6,
@@ -61,7 +61,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
+                "img": "/images/nothing.png"
             },
             {
                 "id": 7,
@@ -69,7 +69,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
+                "img": "/images/nothing.png"
             },
             {
                 "id": 8,
@@ -77,7 +77,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
+                "img": "/images/nothing.png"
             },
             {
                 "id": 9,
@@ -85,7 +85,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
+                "img": "/images/nothing.png"
             },
             {
                 "id": 10,
@@ -93,7 +93,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
+                "img": "/images/nothing.png"
             },
             {
                 "id": 11,
@@ -101,7 +101,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
+                "img": "/images/nothing.png"
             },
             {
                 "id": 12,
@@ -109,7 +109,7 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
+                "img": "/images/nothing.png"
             },
             {
                 "id": 13,
@@ -117,43 +117,13 @@ Page({
                 "desc": "Why buy iPhone 8 Plus with same specs?",
                 "price": 5000.0,
                 "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
+                "img": "/images/nothing.png"
             }
         ];
 
         this.setData({
             products: products
         });
-    },
-
-    //TODO: actions for hitting edit and traded buttons
-
-    deleteDialog: function (e) {
-        let that = this;
-        let id = e.currentTarget.dataset.id;
-        console.log("id: ", id);
-        wx.showModal({
-            title: 'Delete Product',
-            content: e.currentTarget.dataset.name,
-            confirmText: "Confirm",
-            cancelText: "Cancel",
-            success: function (res) {
-                console.log(res);
-                if (res.confirm) {
-                    console.log(that.data.products);
-                    //TODO: call DELETE PRODUCT API
-                    let newProducts = that.data.products.filter( p => p.id != id );
-                    console.log("newProducts: ", newProducts);
-                    that.setData({
-                       products: newProducts
-                    });
-                    console.log('用户点击主操作')
-                }else{
-                    console.log('用户点击辅助操作')
-                }
-            }
-        });
-        console.log("products: ", this.data.products);
     },
 
     /**

@@ -1,4 +1,4 @@
-// pages/product/product.js
+
 
 const app = getApp();
 
@@ -10,7 +10,15 @@ Page({
     data: {
         productId: "",
         productName: "",
-        productDetails: {}
+        productDetails: {},
+        swiperCurrent: 0
+    },
+
+    swiperchange: function(e) {
+        //console.log(e.detail.current)
+        this.setData({
+            swiperCurrent: e.detail.current
+        })
     },
 
     getProductDetails: function () {
