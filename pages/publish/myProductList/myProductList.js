@@ -1,5 +1,3 @@
-
-
 const app = getApp();
 
 Page({
@@ -13,128 +11,15 @@ Page({
         products: []
     },
 
-    getProducts: function (moduleId) {
-        var products = [
-            {
-                "id": 1,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 9999.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 2,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 3,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 4,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 5,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 6,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 7,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 8,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 9,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 10,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 11,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 12,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 13,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            }
-        ];
-
-        this.setData({
-            products: products
-        });
-    },
-
     //TODO: actions for hitting edit and traded buttons
-
     deleteDialog: function (e) {
         let that = this;
         let id = e.currentTarget.dataset.id;
+        let name = e.currentTarget.dataset.name;
         console.log("id: ", id);
         wx.showModal({
             title: 'Delete Product',
-            content: e.currentTarget.dataset.name,
+            content: name,
             confirmText: "Confirm",
             cancelText: "Cancel",
             success: function (res) {
@@ -142,18 +27,73 @@ Page({
                 if (res.confirm) {
                     console.log(that.data.products);
                     //TODO: call DELETE PRODUCT API
-                    let newProducts = that.data.products.filter( p => p.id != id );
+                    let newProducts = that.data.products.filter(p => p.id != id);
                     console.log("newProducts: ", newProducts);
                     that.setData({
-                       products: newProducts
+                        products: newProducts
                     });
+                    that.openDeleted();
                     console.log('用户点击主操作')
-                }else{
+                } else {
                     console.log('用户点击辅助操作')
                 }
             }
         });
         console.log("products: ", this.data.products);
+    },
+
+    toggleTraded: function (e) {
+        var that = this;
+        let id = e.currentTarget.dataset.id;
+        let flag = e.currentTarget.dataset.traded;
+
+        // console.log('flag before: ', flag);
+
+        //TODO: call PUT/PATCH API
+        let newProducts = that.data.products.map(p => {
+            if (p.id == id) {
+                p.traded = !p.traded;
+                flag = p.traded;
+                return p;
+            }
+            return p;
+        });
+
+        that.setData({
+            products: newProducts
+        });
+
+        // console.log("flag after: ", flag);
+
+        if (flag == true)
+            this.openToast();
+        else
+            this.openCheer();
+    },
+
+    openToast: function () {
+        wx.showToast({
+            title: '卖出去了!',
+            icon: 'success',
+            duration: 1000,
+            success: {  }
+        });
+    },
+
+    openCheer: function () {
+        wx.showToast({
+            title: '继续加油!',
+            image: '/images/thumbsup.png',
+            duration: 1000
+        });
+    },
+
+    openDeleted: function () {
+        wx.showToast({
+            title: '已删除',
+            image: '/images/delete.svg',
+            duration: 1000
+        });
     },
 
     /**
@@ -176,6 +116,132 @@ Page({
         this.getProducts(this.data.moduleId);
 
         console.log("Products: ", this.data.products);
+    },
+
+    getProducts: function (moduleId) {
+        var products = [
+            {
+                "id": 1,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 9999.0,
+                "visitCount": 1,
+                "img": ["/images/iphone.jpg"],
+                "traded": false
+            },
+            {
+                "id": 2,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 5000.0,
+                "visitCount": 1,
+                "img": ["/images/iphone.jpg"],
+                "traded": false
+            },
+            {
+                "id": 3,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 5000.0,
+                "visitCount": 1,
+                "img": ["/images/iphone.jpg"],
+                "traded": false
+            },
+            {
+                "id": 4,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 5000.0,
+                "visitCount": 1,
+                "img": ["/images/iphone.jpg"],
+                "traded": false
+            },
+            {
+                "id": 5,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 5000.0,
+                "visitCount": 1,
+                "img": ["/images/iphone.jpg"],
+                "traded": false
+            },
+            {
+                "id": 6,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 5000.0,
+                "visitCount": 1,
+                "img": ["/images/iphone.jpg"],
+                "traded": false
+            },
+            {
+                "id": 7,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 5000.0,
+                "visitCount": 1,
+                "img": ["/images/iphone.jpg"],
+                "traded": false
+            },
+            {
+                "id": 8,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 5000.0,
+                "visitCount": 1,
+                "img": ["/images/iphone.jpg"],
+                "traded": false
+            },
+            {
+                "id": 9,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 5000.0,
+                "visitCount": 1,
+                "img": ["/images/iphone.jpg"],
+                "traded": false
+            },
+            {
+                "id": 10,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 5000.0,
+                "visitCount": 1,
+                "img": ["/images/iphone.jpg"],
+                "traded": false
+            },
+            {
+                "id": 11,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 5000.0,
+                "visitCount": 1,
+                "img": ["/images/iphone.jpg"],
+                "traded": false
+            },
+            {
+                "id": 12,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 5000.0,
+                "visitCount": 1,
+                "img": ["/images/iphone.jpg"],
+                "traded": false
+            },
+            {
+                "id": 13,
+                "name": "iPhone 7 Plus",
+                "desc": "Why buy iPhone 8 Plus with same specs?",
+                "price": 5000.0,
+                "visitCount": 1,
+                "img": ["/images/iphone.jpg"],
+                "traded": false
+            }
+        ];
+
+        this.setData({
+            products: products
+        });
     },
 
     /**

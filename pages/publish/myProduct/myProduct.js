@@ -9,25 +9,81 @@ Page({
      */
     data: {
         productId: "",
-        productName: "",
-        productDetails: {}
+        productDetails: {},
+        wordCount: 0
     },
 
     getProductDetails: function () {
         var productDetails =
             {
                 "id": 1,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1231,
-                "img": [
-                    "/images/emma.jpg"
-                ]
+                "title": {
+                    "label": "商品",
+                    "value": "iPhone 7 Plus"
+                },
+                "desc": {
+                    "label": "描述",
+                    "value": "Why buy iPhone 8 Plus with same specs?"
+                },
+                "price": {
+                    "label": "金额",
+                    "value": "5000.0"
+                },
+                "attr": [
+                    {
+                        "label": "浏览量",
+                        "type": "NUMBER",
+                        "editable": false,
+                        "value": "1231"
+                    }
+                ],
+                "img": ["/images/emma.jpg", "/images/emma.jpg"]
             }
 
+        // {
+        //     "id": 1,
+        //     "name": "iPhone 7 Plus",
+        //     "desc": "Why buy iPhone 8 Plus with same specs?",
+        //     "price": 5000.0,
+        //     "visitCount": 1231,
+        //     "img": [
+        //         "/images/emma.jpg"
+        //     ]
+        // }
+
         this.setData({
-            productDetails: productDetails
+            productDetails: productDetails,
+            wordCount: productDetails.desc.value.length
+        });
+    },
+
+    confirmEdit: function (e) {
+        let that = this;
+        wx.navigateBack({
+            delta: 1,
+            success: that.toastOnUpdateSuccess
+        });
+    },
+
+    cancelEdit: function (e) {
+        wx.navigateBack({
+            delta: 1
+        });
+    },
+
+    descChange: function (e) {
+
+        this.setData({
+            wordCount: e.detail.value.length
+        });
+
+    },
+
+    toastOnUpdateSuccess: function() {
+        wx.showToast({
+            title: '修改成功!',
+            icon: 'success',
+            duration: 1000
         });
     },
 
@@ -44,8 +100,7 @@ Page({
         //        });
 
         this.setData({
-            productId: options.productId,
-            productName: options.productName
+            productId: options.productId
         });
 
         this.getProductDetails();

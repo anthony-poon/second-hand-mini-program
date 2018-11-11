@@ -1,4 +1,3 @@
-
 <!-- TODO: Convert duplicate pages to template -->
 <template name="tabBar">
 
@@ -7,7 +6,7 @@
 
         <block wx:for="{{tabBar.list}}" wx:key="pagePath">
 
-            <!-- TODO: Implement correct open type -->
+            <!-- TODO: Implement correct open type of navigation -->
             <navigator url="{{item.pagePath}}" open-type="redirect" class="{{item.class}}"
                        style="{{item.active? 'color: '+(item.selectedColor? item.selectedColor : tabBar.selectedColor) : ''}}">
 

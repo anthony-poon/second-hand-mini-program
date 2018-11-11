@@ -50,16 +50,25 @@
 
                 <view class="weui-form-preview__ft">
                     <navigator class="weui-form-preview__btn weui-form-preview__btn_warning"
-                               data-id = "{{item.id}}" data-name="{{item.name}}"
+                               data-id="{{item.id}}" data-name="{{item.name}}"
                                hover-class="weui-form-preview__btn_active" bindtap="deleteDialog">删除
                     </navigator>
 
-                    <navigator class="weui-form-preview__btn weui-form-preview__btn_default"
-                               hover-class="weui-form-preview__btn_active">编辑
+                    <navigator wx:if="{{item.traded == true}}"
+                            class="weui-form-preview__btn weui-form-preview__btn_primary"
+                            data-id="{{item.id}}" data-traded="{{item.traded}}"
+                            hover-class="weui-form-preview__btn_active" bindtap="toggleTraded">已交易
                     </navigator>
 
-                    <navigator class="weui-form-preview__btn weui-form-preview__btn_default"
-                               hover-class="weui-form-preview__btn_active">已交易
+                    <navigator wx:if="{{item.traded == false}}"
+                            class="weui-form-preview__btn weui-form-preview__btn_default"
+                            data-id="{{item.id}}" data-traded="{{item.traded}}"
+                            hover-class="weui-form-preview__btn_active" bindtap="toggleTraded">已交易
+                    </navigator>
+
+                    <navigator url="/pages/publish/myProduct/myProduct?productId={{item.id}}"
+                               class="weui-form-preview__btn weui-form-preview__btn_default"
+                               hover-class="weui-form-preview__btn_active">编辑
                     </navigator>
 
                 </view>
@@ -71,6 +80,5 @@
 
     <import src="/tabbar.wxml"/>
     <template is="tabBar" data="{{tabBar}}"/>
-
 
 </view>

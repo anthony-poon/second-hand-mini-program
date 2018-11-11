@@ -7,51 +7,103 @@
 
     <view class="page__bd">
 
-        <view class="weui-form-preview">
-            <view class="weui-form-preview__hd">
-                <swiper indicator-dots="true">
-                    <block wx:for="{{productDetails.img}}" wx:key="*this">
-                        <swiper-item class="swiper-large"> 
-                            <image src="{{item}}" mode="aspectFit"></image>
-                        </swiper-item>
-                    </block>
-                </swiper>
-            </view>
-
-            <view class="weui-form-preview__hd">
-                <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">商品</view>
-                    <view class="weui-form-preview__value_in-hd">{{productDetails.name}}</view>
+        <view class="weui-cells__title">{{productDetails.title.label}}</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" value="{{productDetails.title.value}}"/>
                 </view>
             </view>
-
-            <view class="weui-form-preview__bd">
-
-                <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">描述</view>
-                    <view class="weui-form-preview__value">{{productDetails.desc}}</view>
-                </view>
-                <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">金额</view>
-                    <view class="weui-form-preview__value">¥{{productDetails.price}}</view>
-                </view>
-                <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">浏览量</view>
-                    <view class="weui-form-preview__value">{{productDetails.visitCount}}</view>
-                </view>
-            </view>
-
-            <view class="weui-form-preview__ft">
-                <navigator url="" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">Contact Seller</navigator>
-            </view>
-
         </view>
+
+        <view class="weui-cells__title">{{productDetails.desc.label}}</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" value="{{productDetails.desc.value}}"
+                              bindinput="descChange" maxlength="200"
+                              placeholder="请输入文本" style="height: 3.3em"/>
+                    <view class="weui-textarea-counter">{{wordCount}}/200</view>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-cells__title">{{productDetails.price.label}}</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <input class="weui-input" value="{{productDetails.price.value}}"/>
+                </view>
+            </view>
+        </view>
+
+        <block wx:for="{{productDetails.attr}}" wx:for-item="item" wx:key="*this">
+            <block wx-if="{{item.editable}}">
+                <view class="weui-cells__title">{{item.label}}</view>
+                <view class="weui-cells weui-cells_after-title">
+                    <view class="weui-cell">
+                        <view class="weui-cell__bd">
+                            <input class="weui-input" value="{{item.value}}"/>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </block>
+
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" bindtap="confirmEdit">确定</button>
+        </view>
+
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="default" bindtap="cancelEdit">取消</button>
+        </view>
+
+        <!--<view class="weui-form-preview">-->
+        <!--<view class="weui-form-preview__hd">-->
+        <!--<swiper indicator-dots="true">-->
+        <!--<block wx:for="{{productDetails.img}}" wx:key="*this">-->
+        <!--<swiper-item class="swiper-large"> -->
+        <!--<image src="{{item}}" mode="aspectFit"></image>-->
+        <!--</swiper-item>-->
+        <!--</block>-->
+        <!--</swiper>-->
+        <!--</view>-->
+
+        <!--<view class="weui-form-preview__hd">-->
+        <!--<view class="weui-form-preview__item">-->
+        <!--<view class="weui-form-preview__label">{{productDetails.title.name}}</view>-->
+        <!--<view class="weui-form-preview__value_in-hd">{{productDetails.title.value}}</view>-->
+        <!--</view>-->
+        <!--</view>-->
+
+        <!--<view wx:for="{{productDetails.attributes}}" wx:for-item="item" wx:key="{{item.name}}" class="weui-form-preview__bd">-->
+
+        <!--<view wx:if="{{item.type == 'TEXT'}}" class="weui-form-preview__item">-->
+        <!--<view class="weui-form-preview__label">{{item.name}}</view>-->
+        <!--<view class="weui-form-preview__value">{{item.value}}</view>-->
+        <!--</view>-->
+        <!--<view wx:if="{{item.type == 'PRICE'}}" class="weui-form-preview__item">-->
+        <!--<view class="weui-form-preview__label">{{item.name}}</view>-->
+        <!--<view class="weui-form-preview__value">¥{{item.value}}</view>-->
+        <!--</view>-->
+        <!--<view wx:if="{{item.type == 'NUMBER'}}" class="weui-form-preview__item">-->
+        <!--<view class="weui-form-preview__label">{{item.name}}</view>-->
+        <!--<view class="weui-form-preview__value">{{item.value}}</view>-->
+        <!--</view>-->
+        <!--</view>-->
+
+        <!--<view class="weui-form-preview__ft">-->
+        <!--<navigator url="" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">Contact Seller</navigator>-->
+        <!--</view>-->
+
+        <!--</view>-->
+
+
     </view>
 
 
-    <import src="/tabbar.wxml" />
-    <template is="tabBar" data="{{tabBar}}" />
-
+    <import src="/tabbar.wxml"/>
+    <template is="tabBar" data="{{tabBar}}"/>
 
 
 </view>
