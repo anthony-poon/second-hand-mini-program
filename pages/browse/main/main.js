@@ -1,6 +1,9 @@
 // pages/main/main.js
 
+import {main_cities_data, main_page_modules} from "../../mock-data";
+
 const app = getApp();
+
 
 Page({
 
@@ -46,18 +49,7 @@ Page({
 
     // TODO: set selected city to global?
     getCities: function () {
-        var citiesData = [
-            {"id": 1, "name": "伦敦"},
-            {"id": 2, "name": "伯明罕"},
-            {"id": 3, "name": "格拉斯哥"},
-            {"id": 4, "name": "利物浦"},
-            {"id": 5, "name": "布里斯托"},
-            {"id": 6, "name": "雪菲尔"},
-            {"id": 7, "name": "曼彻斯特"},
-            {"id": 8, "name": "里兹"},
-            {"id": 9, "name": "爱丁堡"},
-            {"id": 10, "name": "莱斯特"},
-        ];
+        var citiesData = main_cities_data;
 
         var cities = [];
 
@@ -79,14 +71,7 @@ Page({
     },
 
     getModules: function (cityId) {
-        var modules = [
-            {"id": 1, "title": "二手交易", "img": "/images/nothing.png"},
-            {"id": 2, "title": "房屋转让", "img": "/images/nothing.png"},
-            {"id": 3, "title": "票务转让", "img": "/images/nothing.png"},
-            {"id": 4, "title": "......", "img": "/images/nothing.png"},
-            {"id": 4, "title": "......", "img": "/images/nothing.png"},
-            {"id": 4, "title": "......", "img": "/images/nothing.png"},
-        ];
+        var modules = main_page_modules;
         this.setData({
             modules: modules
         });
@@ -127,7 +112,6 @@ Page({
         this.getCities();
         var cityId = this.getUserCityId();
         this.getModules(cityId);
-
     },
 
     /**

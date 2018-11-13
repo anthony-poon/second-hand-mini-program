@@ -9,48 +9,49 @@
 
         <view class="simple-container" wx:for="{{products}}" wx:key="id">
             <view class="weui-form-preview">
-                <view class="swiper-container">
+                <view wx:if="{{item.img.length > 0}}" class="swiper-container">
                     <swiper class="swiper_box" bindchange="swiperchange">
-                        <block wx:for="{{item.img}}" wx:key="id">
+                        <block wx:for="{{item.img}}" wx:for-item="img">
                             <swiper-item>
-                                <image src="{{item}}" mode="aspectFit"></image>
+                                <image src="{{img}}" mode="aspectFit"></image>
                             </swiper-item>
                         </block>
                     </swiper>
                     <view class="dots">
                         <block wx:for="{{item.img}}" wx:key="unique">
-                            <view wx:if="{{item.img.length > 1}}"
-                                  class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+                            <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
                         </block>
                     </view>
                 </view>
 
                 <view class="weui-form-preview__hd">
                     <view class="weui-form-preview__item">
-                        <view class="weui-form-preview__label">商品</view>
-                        <view class="weui-form-preview__value_in-hd">{{item.name}}</view>
+                        <view class="weui-form-preview__label">{{item.title.label}}</view>
+                        <view class="weui-form-preview__value_in-hd">{{item.title.value}}</view>
                     </view>
                 </view>
 
                 <view class="weui-form-preview__bd">
 
                     <view class="weui-form-preview__item">
-                        <view class="weui-form-preview__label">描述</view>
-                        <view class="weui-form-preview__value">{{item.desc}}</view>
+                        <view class="weui-form-preview__label">{{item.desc.label}}</view>
+                        <view class="weui-form-preview__value">{{item.desc.value}}</view>
                     </view>
                     <view class="weui-form-preview__item">
-                        <view class="weui-form-preview__label">金额</view>
-                        <view class="weui-form-preview__value">¥{{item.price}}</view>
+                        <view class="weui-form-preview__label">{{item.price.label}}</view>
+                        <view class="weui-form-preview__value">¥{{item.price.value}}</view>
                     </view>
-                    <view class="weui-form-preview__item">
-                        <view class="weui-form-preview__label">浏览量</view>
-                        <view class="weui-form-preview__value">{{item.visitCount}}</view>
-                    </view>
+                    <block wx:for="{{item.attr}}" wx:for-item="attr">
+                        <view class="weui-form-preview__item">
+                            <view class="weui-form-preview__label">{{attr.label}}</view>
+                            <view class="weui-form-preview__value">{{attr.value}}</view>
+                        </view>
+                    </block>
                 </view>
 
                 <view class="weui-form-preview__ft">
                     <navigator class="weui-form-preview__btn weui-form-preview__btn_warning"
-                               data-id="{{item.id}}" data-name="{{item.name}}"
+                               data-id="{{item.id}}" data-name="{{item.title.value}}"
                                hover-class="weui-form-preview__btn_active" bindtap="deleteDialog">删除
                     </navigator>
 

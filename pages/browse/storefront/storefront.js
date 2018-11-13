@@ -1,5 +1,7 @@
 // pages/product/product.js
 
+import {getProductListByModuleOrStoreId} from "../../mock-data";
+
 const app = getApp();
 
 Page({
@@ -13,113 +15,8 @@ Page({
         products: []
     },
 
-    getProducts: function () {
-        var products = [
-            {
-                "id": 1,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 2,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 3,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 4,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 5,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 6,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 7,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 8,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 9,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 10,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 11,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 12,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            },
-            {
-                "id": 13,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1,
-                "img": ["/images/iphone.jpg"]
-            }
-        ];
+    getProducts: function (sfId) {
+        var products = getProductListByModuleOrStoreId(sfId);
 
         this.setData({
             products: products
@@ -143,7 +40,7 @@ Page({
             sfName: options.sfName
         });
 
-        this.getProducts();
+        this.getProducts(options.sfId);
 
         console.log("Products: ", this.data.products);
     },

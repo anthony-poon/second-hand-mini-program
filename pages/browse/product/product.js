@@ -1,6 +1,8 @@
+import {second_hand_product_details} from "../../mock-data";
 
 
 const app = getApp();
+
 
 Page({
 
@@ -22,17 +24,7 @@ Page({
     },
 
     getProductDetails: function () {
-        var productDetails =
-            {
-                "id": 1,
-                "name": "iPhone 7 Plus",
-                "desc": "Why buy iPhone 8 Plus with same specs?",
-                "price": 5000.0,
-                "visitCount": 1231,
-                "img": [
-                    "/images/emma.jpg"
-                ]
-            }
+        var productDetails = second_hand_product_details;
 
         this.setData({
             productDetails: productDetails

@@ -1,5 +1,7 @@
 // pages/product/product.js
 
+import {getMyProductDetailsByProductId} from "../../mock-data";
+
 const app = getApp();
 
 Page({
@@ -13,43 +15,10 @@ Page({
         wordCount: 0
     },
 
-    getProductDetails: function () {
-        var productDetails =
-            {
-                "id": 1,
-                "title": {
-                    "label": "商品",
-                    "value": "iPhone 7 Plus"
-                },
-                "desc": {
-                    "label": "描述",
-                    "value": "Why buy iPhone 8 Plus with same specs?"
-                },
-                "price": {
-                    "label": "金额",
-                    "value": "5000.0"
-                },
-                "attr": [
-                    {
-                        "label": "浏览量",
-                        "type": "NUMBER",
-                        "editable": false,
-                        "value": "1231"
-                    }
-                ],
-                "img": ["/images/emma.jpg", "/images/emma.jpg"]
-            }
+    getMyProductDetails: function (productId) {
+        var productDetails = getMyProductDetailsByProductId(productId);
 
-        // {
-        //     "id": 1,
-        //     "name": "iPhone 7 Plus",
-        //     "desc": "Why buy iPhone 8 Plus with same specs?",
-        //     "price": 5000.0,
-        //     "visitCount": 1231,
-        //     "img": [
-        //         "/images/emma.jpg"
-        //     ]
-        // }
+        console.log(productDetails);
 
         this.setData({
             productDetails: productDetails,
@@ -103,7 +72,7 @@ Page({
             productId: options.productId
         });
 
-        this.getProductDetails();
+        this.getMyProductDetails(options.productId);
 
         console.log("Product Details: ", this.data.productDetails);
     },

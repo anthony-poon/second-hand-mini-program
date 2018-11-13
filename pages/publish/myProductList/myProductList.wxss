@@ -32,7 +32,7 @@ swiper-item image {
     margin: 0 8rpx;
     width: 14rpx;
     height: 14rpx;
-    background: #fff;
+    background: #f2efec;
     border-radius: 50%;
     transition: all .6s;
     opacity: .5;

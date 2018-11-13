@@ -7,7 +7,7 @@
         <block wx:for="{{tabBar.list}}" wx:key="pagePath">
 
             <!-- TODO: Implement correct open type of navigation -->
-            <navigator url="{{item.pagePath}}" open-type="redirect" class="{{item.class}}"
+            <navigator url="{{item.pagePath}}" open-type="reLaunch" class="{{item.class}}"
                        style="{{item.active? 'color: '+(item.selectedColor? item.selectedColor : tabBar.selectedColor) : ''}}">
 
                 <image src="{{item.selectedIconPath}}" wx:if="{{item.active}}" class="tabBar-img"></image>
