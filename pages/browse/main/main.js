@@ -1,7 +1,7 @@
 // pages/main/main.js
 
 import {main_cities_data, main_page_modules} from "../../mock-data";
-
+import {server} from "../../../utils/util.js";
 const app = getApp();
 
 
@@ -64,12 +64,6 @@ Page({
         console.log(cities);
     },
 
-    getUserCityId: function () {
-        var cityId = this.data.cityId;
-        console.log("City ID: ", cityId)
-        return cityId;
-    },
-
     getModules: function (cityId) {
         var modules = main_page_modules;
         this.setData({
@@ -88,30 +82,52 @@ Page({
      */
     onLoad: function (options) {
         // TODO: for counting redirect
-        var count = 0;
-        console.log(++count);
-
-        app.editTabBar();
-
-
-        wx.getSetting({
-            success: function (res) {
-                if (res.authSetting['scope.userInfo']) {
-                    // Authorized. "getUserInfo" can be directly called to retrieve profile photo/nickname
-                    wx.getUserInfo({
-                        success: function (res) {
-                            console.log("res.userInfo: ", res.userInfo)
-                        }
-                    })
-                }
-            }
+      var count = 0;
+      console.log(++count);
+      server.getCities().then((response) => {
+        // Get all available cities
+        var cities = response.data.cities;
+        // Default current cities as first in array
+        var currCity = cities[0].id
+        // Get module list of specific cities
+        server.getCities(currCity).then((response) => {
+          var modules = response.data.modules;
+          // Reformat backend data to view data
+          var viewData = {
+            cities: [],
+            modules: []
+          };
+          cities.forEach((city) => {
+            console.log(city)
+            viewData.cities.push(city.name);
+          })
+          modules.forEach((moduleObj) => {
+            viewData.modules.push({
+              id: moduleObj.id,
+              title: moduleObj.name,
+              sf: true,
+              img: "/images/nothing.png"
+            })
+          })
+          this.setData(viewData)
         });
-
-        console.log("canIUse: ", this.data.canIUse);
-
-        this.getCities();
-        var cityId = this.getUserCityId();
-        this.getModules(cityId);
+      }).catch(function (response) {
+        console.log(response);
+      })
+      app.editTabBar();
+      wx.getSetting({
+          success: function (res) {
+              if (res.authSetting['scope.userInfo']) {
+                  // Authorized. "getUserInfo" can be directly called to retrieve profile photo/nickname
+                  wx.getUserInfo({
+                      success: function (res) {
+                          console.log("res.userInfo: ", res.userInfo)
+                      }
+                  })
+              }
+          }
+      });
+      console.log("canIUse: ", this.data.canIUse);
     },
 
     /**

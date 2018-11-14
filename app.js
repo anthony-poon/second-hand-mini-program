@@ -107,5 +107,5 @@ App({
             ],
             position: "bottom"
         }
-    }
+    },
 });

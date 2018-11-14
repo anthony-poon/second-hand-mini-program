@@ -1,7 +1,7 @@
 // pages/storefront/storefront.js
 
 import {second_hand_module_storefronts} from "../../mock-data";
-
+import { server } from "../../../utils/util.js";
 const app = getApp();
 
 Page({
@@ -54,21 +54,27 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    app.editTabBar();
 
-        app.editTabBar();
-
-        console.log(options);
-
-//        wx.showLoading({
-//            title: '加载中'
-//        });
-
-        this.setData({
-            moduleId: options.moduleId,
-            moduleName: options.moduleName
-        });
-
-        this.getStorefronts(this.data.moduleId);
+    console.log(options);
+    server.getModules(options.moduleId).then((response) => {
+      // List of available sf
+      var storeFronts = response.data.storeFronts
+      console.log(response.data)
+      var viewData = {
+        moduleId: options.moduleId,
+        moduleName: options.moduleName,
+        storefronts: []
+      }
+      storeFronts.forEach((storeFront) => {
+        viewData.storefronts.push({
+          id: storeFront.id,
+          name: storeFront.name,
+          img: "/images/iphone_7_plus.jpg"
+        })
+      });
+      this.setData(viewData);
+    })
   },
 
   /**

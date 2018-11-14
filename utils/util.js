@@ -14,6 +14,55 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const server = {
+  baseUrl: "http://wechat.anthonypoon.net",
+  getCities: function (id) {
+    var p = new Promise((resolve, reject) => {
+      var url = this.baseUrl + "/api/cities";
+      if (id) {
+        url = url + "/" + id
+      }
+      wx.request({
+        url: url,
+        method: "GET",
+        success: resolve,
+        fail: reject
+      })
+    });
+    return p;
+  },
+  getModules: function (id) {
+    var p = new Promise((resolve, reject) => {
+      var url = this.baseUrl + "/api/modules";
+      if (id) {
+        url = url + "/" + id
+      }
+      wx.request({
+        url: url,
+        method: "GET",
+        success: resolve,
+        fail: reject
+      })
+    });
+    return p;
+  },
+  getStoreFronts: function (id) {
+    var p = new Promise((resolve, reject) => {
+      var url = this.baseUrl + "/api/store-fronts";
+      if (id) {
+        url = url + "/" + id
+      }
+      wx.request({
+        url: url,
+        method: "GET",
+        success: resolve,
+        fail: reject
+      })
+    });
+    return p;
+  }
+}
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  server: server
 }

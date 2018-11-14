@@ -1,5 +1,5 @@
 import {second_hand_product_details} from "../../mock-data";
-
+import { server } from "../../../utils/util.js";
 
 const app = getApp();
 
@@ -35,22 +35,18 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        app.editTabBar();
+      app.editTabBar();
+      console.log(options);
+      
 
-        console.log(options);
+      this.setData({
+          productId: options.productId,
+          productName: options.productName
+      });
 
-        //        wx.showLoading({
-        //            title: '加载中'
-        //        });
+      this.getProductDetails();
 
-        this.setData({
-            productId: options.productId,
-            productName: options.productName
-        });
-
-        this.getProductDetails();
-
-        console.log("Product Details: ", this.data.productDetails);
+      console.log("Product Details: ", this.data.productDetails);
     },
 
     /**
