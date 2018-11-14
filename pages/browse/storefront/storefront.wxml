@@ -1,67 +1,151 @@
+<template name="second-hand">
+  <view class="weui-form-preview">
+      <view wx:if="{{item.img.length > 0}}" class="swiper-container">
+          <swiper class="swiper_box" bindchange="swiperchange">
+              <block wx:for="{{item.img}}" wx:key="id">
+                  <swiper-item>
+                      <image src="{{item}}" mode="aspectFit"></image>
+                  </swiper-item>
+              </block>
+          </swiper>
+          <view class="dots">
+              <block wx:for="{{item.img}}" wx:key="unique">
+                  <view wx:if="{{item.img.length > 1}}"
+                        class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+              </block>
+          </view>
+      </view>
+      <view class="weui-form-preview__hd">
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">商品</view>
+              <view class="weui-form-preview__value_in-hd">{{ item.title }}</view>
+          </view>
+      </view>
+      <view class="weui-form-preview__bd">
+
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">描述</view>
+              <view class="weui-form-preview__value">{{ item.desc }}</view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">金额</view>
+              <view class="weui-form-preview__value">¥{{ item.price }}</view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">浏览量</view>
+              <view class="weui-form-preview__value">{{ item.visitorCount }}</view>
+          </view>
+      </view>
+  </view>
+</template>
+
+<template name="housing">
+  <view class="weui-form-preview">
+      <view wx:if="{{item.img.length > 0}}" class="swiper-container">
+          <swiper class="swiper_box" bindchange="swiperchange">
+              <block wx:for="{{item.img}}" wx:key="id">
+                  <swiper-item>
+                      <image src="{{item}}" mode="aspectFit"></image>
+                  </swiper-item>
+              </block>
+          </swiper>
+          <view class="dots">
+              <block wx:for="{{item.img}}" wx:key="unique">
+                  <view wx:if="{{item.img.length > 1}}"
+                        class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+              </block>
+          </view>
+      </view>
+      <view class="weui-form-preview__hd">
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">商品</view>
+              <view class="weui-form-preview__value_in-hd">{{ item.title }}</view>
+          </view>
+      </view>
+      <view class="weui-form-preview__bd">
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">描述</view>
+              <view class="weui-form-preview__value">{{ item.desc }}</view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">金额</view>
+              <view class="weui-form-preview__value">¥{{ item.price }}</view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">浏览量</view>
+              <view class="weui-form-preview__value">{{ item.visitorCount }}</view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">位置</view>
+              <view class="weui-form-preview__value">{{ item.location }}</view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">房型</view>
+              <view class="weui-form-preview__value">{{ item.propertyType }}</view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">时长</view>
+              <view class="weui-form-preview__value">{{ item.durationDay }}</view>
+          </view>
+      </view>
+  </view>
+</template>
 
 
+<template name="ticketing">
+  <view class="weui-form-preview">
+      <view wx:if="{{item.img.length > 0}}" class="swiper-container">
+          <swiper class="swiper_box" bindchange="swiperchange">
+              <block wx:for="{{item.img}}" wx:key="id">
+                  <swiper-item>
+                      <image src="{{item}}" mode="aspectFit"></image>
+                  </swiper-item>
+              </block>
+          </swiper>
+          <view class="dots">
+              <block wx:for="{{item.img}}" wx:key="unique">
+                  <view wx:if="{{item.img.length > 1}}"
+                        class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+              </block>
+          </view>
+      </view>
+      <view class="weui-form-preview__hd">
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">商品</view>
+              <view class="weui-form-preview__value_in-hd">{{ item.title }}</view>
+          </view>
+      </view>
+      <view class="weui-form-preview__bd">
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">描述</view>
+              <view class="weui-form-preview__value">{{ item.desc }}</view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">金额</view>
+              <view class="weui-form-preview__value">¥{{ item.price }}</view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">浏览量</view>
+              <view class="weui-form-preview__value">{{ item.visitorCount }}</view>
+          </view>
+          <view class="weui-form-preview__item">
+              <view class="weui-form-preview__label">有效期</view>
+              <view class="weui-form-preview__value">{{ item.durationDay }}</view>
+          </view>
+      </view>
+  </view>
+</template>
 <view class="page">
-
     <view class="page__hd">
         <view class="page__title">{{sfName}}</view>
     </view>
-
     <view class="page__bd">
-
-
-        <view class="simple-container" wx:for="{{products}}" wx:key="id">
-            <view class="weui-form-preview">
-                <view wx:if="{{item.img.length > 0}}" class="swiper-container">
-                    <swiper class="swiper_box" bindchange="swiperchange">
-                        <block wx:for="{{item.img}}" wx:key="id">
-                            <swiper-item>
-                                <image src="{{item}}" mode="aspectFit"></image>
-                            </swiper-item>
-                        </block>
-                    </swiper>
-                    <view class="dots">
-                        <block wx:for="{{item.img}}" wx:key="unique">
-                            <view wx:if="{{item.img.length > 1}}"
-                                  class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
-                        </block>
-                    </view>
-                </view>
-
-                <view class="weui-form-preview__hd">
-                    <view class="weui-form-preview__item">
-                        <view class="weui-form-preview__label">{{item.title.label}}</view>
-                        <view class="weui-form-preview__value_in-hd">{{item.title.value}}</view>
-                    </view>
-                </view>
-
-                <view class="weui-form-preview__bd">
-
-                    <view class="weui-form-preview__item">
-                        <view class="weui-form-preview__label">{{item.desc.label}}</view>
-                        <view class="weui-form-preview__value">{{item.desc.value}}</view>
-                    </view>
-                    <view class="weui-form-preview__item">
-                        <view class="weui-form-preview__label">{{item.price.label}}</view>
-                        <view class="weui-form-preview__value">¥{{item.price.value}}</view>
-                    </view>
-                    <block wx:for="{{item.attr}}" wx:for-item="attr">
-                        <view class="weui-form-preview__item">
-                            <view class="weui-form-preview__label">{{attr.label}}</view>
-                            <view class="weui-form-preview__value">{{attr.value}}</view>
-                        </view>
-                    </block>
-                </view>
-
-
-            </view>
+        <view class="simple-container" wx:for="{{products}}" wx:for-item="item" wx:key="id">
+          <template is="{{ item.template }}" data="{{ item: item }}"/>
         </view>
     </view>
-
-
     <import src="/tabbar.wxml"/>
     <template is="tabBar" data="{{tabBar}}"/>
-
-
 </view>
 
 

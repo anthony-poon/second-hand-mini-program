@@ -37,36 +37,52 @@ Page({
           sfName: options.sfName,
           products: []
         }
+        
         storeItems.forEach((storeItem) => {
-          storeItem.assets
-          viewData.products.push({
-            id: storeItem.id,
-            title: {
-              label: "商品",
-              value: storeItem.name
-            },
-            desc: {
-              label: "描述",
-              value: storeItem.description
-            },
-            attr: [
-              {
-                "editable": false,
-                "label": "浏览量",
-                "type": "NUMBER",
-                "value": 12345
-              }
-            ],
-            price: {
-              "label": "金额",
-              "value": "5000"
-            },
-            visitCount: 1234,
-            // Assuming it is an array
-            img: storeItem.assets,
-            traded: false
-          })
-        })
+          var itemType = storeItem.itemType
+          switch (itemType) {
+            case "SecondHandItem":
+              viewData.products.push({
+                id: storeItem.id,
+                template: "second-hand",
+                title: storeItem.name,
+                desc: storeItem.description,
+                visitorCount: storeItem.visitorCount,
+                price: storeItem.price,
+                img: storeItem.assets,
+                traded: false
+              })
+              break;
+            case "HousingItem":
+              viewData.products.push({
+                id: storeItem.id,
+                template: "housing",
+                title: storeItem.name,
+                desc: storeItem.description,
+                visitorCount: storeItem.visitorCount,
+                price: storeItem.price,
+                img: storeItem.assets,
+                traded: false,
+                location: storeItem.location,
+                propertyType: storeItem.propertyType,
+                duration: storeItem.durationDay
+              })
+              break;
+            case "TicketingItem":
+              viewData.products.push({
+                id: storeItem.id,
+                template: "ticketing",
+                title: storeItem.name,
+                desc: storeItem.description,
+                visitorCount: storeItem.visitorCount,
+                price: storeItem.price,
+                img: storeItem.assets,
+                traded: false,
+                validTill: storeItem.validTill,
+              })
+              break;
+          }
+        });
         console.log(viewData);
         this.setData(viewData);
       });
