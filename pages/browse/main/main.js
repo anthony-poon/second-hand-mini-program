@@ -94,6 +94,12 @@ Page({
         server.login().then((response) => {
           console.log(response);
         });
+        server.getCities().then((response) => {
+          console.log(response);
+        })
+        server.getModules().then((response) => {
+          console.log(response);
+        })
         app.editTabBar();
 
 
