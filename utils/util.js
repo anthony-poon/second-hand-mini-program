@@ -51,6 +51,51 @@ const server = {
       console.log(response);
     });
     return p;
+  },
+  getCities: function (id) {
+    var p = new Promise((resolve, reject) => {
+      var url = this.baseUrl + "/api/cities";
+      if (id) {
+        url = url + "/" + id
+      }
+      wx.request({
+        url: url,
+        method: "GET",
+        success: resolve,
+        fail: reject
+      })
+    });
+    return p;
+  },
+  getModules: function (id) {
+    var p = new Promise((resolve, reject) => {
+      var url = this.baseUrl + "/api/modules";
+      if (id) {
+        url = url + "/" + id
+      }
+      wx.request({
+        url: url,
+        method: "GET",
+        success: resolve,
+        fail: reject
+      })
+    });
+    return p;
+  },
+  getStoreFronts: function (id) {
+    var p = new Promise((resolve, reject) => {
+      var url = this.baseUrl + "/api/store-fronts";
+      if (id) {
+        url = url + "/" + id
+      }
+      wx.request({
+        url: url,
+        method: "GET",
+        success: resolve,
+        fail: reject
+      })
+    });
+    return p;
   }
 }
 
