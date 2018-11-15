@@ -12,9 +12,9 @@ Page({
     data: {
         productId: "",
         productDetails: {},
-        wordCount: 0
+        wordCount: 0,
+        testing: {}
     },
-
     getMyProductDetails: function (productId) {
         var productDetails = getMyProductDetailsByProductId(productId);
 
@@ -43,9 +43,9 @@ Page({
     descChange: function (e) {
 
         this.setData({
-            wordCount: e.detail.value.length
+            wordCount: e.detail.value.length,
         });
-
+      console.log(e);
     },
 
     toastOnUpdateSuccess: function() {

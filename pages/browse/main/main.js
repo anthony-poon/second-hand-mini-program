@@ -91,9 +91,22 @@ Page({
         var count = 0;
         console.log(++count);
         // return a promise
-        server.login().then((response) => {
-          console.log(response);
-        });
+        // server.login().then((response) => {
+        //   console.log(response);
+        // });
+        // Uncomment to run
+        // server.mockLogin("abc").then((response) => {
+        //   console.log(response);
+        //   server.postStoreItems({
+        //     price: 123,
+        //     name: "_testing_item",
+        //     description: "abc",
+        //   }, "SF_00000001", "abc").then((response) => {
+        //     console.log(response);
+        //   }).catch((response) => {
+        //     console.log(response);
+        //   })
+        // });
         server.getCities().then((response) => {
           console.log(response);
         })

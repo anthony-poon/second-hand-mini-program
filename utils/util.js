@@ -96,6 +96,35 @@ const server = {
       })
     });
     return p;
+  },
+  postStoreItems: function (json, id, openId) {
+    var p = new Promise((resolve, reject) => {
+      wx.request({
+        url: this.baseUrl + "/api/personal/store-items?id=" + id,
+        method: "POST",
+        header: {
+          "Authorization": openId
+        },
+        data:  json,
+        success: resolve,
+        fail: reject
+      })
+    })
+    return p;
+  },
+  mockLogin: function(openId) {
+    var p = new Promise((resolve, reject) => {
+      wx.request({
+        url: this.baseUrl + "/api/security/login",
+        method: "POST",
+        header: {
+          "Authorization": openId
+        },
+        success: resolve,
+        fail: reject
+      })
+    })
+    return p;
   }
 }
 
