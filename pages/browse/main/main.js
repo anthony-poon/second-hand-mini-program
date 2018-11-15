@@ -1,5 +1,5 @@
 // pages/main/main.js
-
+import { server } from "../../../utils/util.js";
 import {main_cities_data, main_page_modules} from "../../mock-data";
 
 const app = getApp();
@@ -90,7 +90,10 @@ Page({
         // TODO: for counting redirect
         var count = 0;
         console.log(++count);
-
+        // return a promise
+        server.login().then((response) => {
+          console.log(response);
+        });
         app.editTabBar();
 
 
