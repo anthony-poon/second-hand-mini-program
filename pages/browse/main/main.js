@@ -1,5 +1,5 @@
 // pages/main/main.js
-import { server } from "../../../utils/util.js";
+import {server} from "../../../utils/util.js";
 import {main_cities_data, main_page_modules} from "../../mock-data";
 
 const app = getApp();
@@ -22,28 +22,6 @@ Page({
         console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
             cityId: e.detail.value
-        })
-    },
-
-    //TODO: slow response time than built-in navigator due to having to pass params
-    jumpToModule: function (e) {
-
-        console.log(e);
-        var item = e.currentTarget.dataset.variable;
-        var id = item[0];
-        var title = item[1];
-        var url = "";
-        if (id != 4) {
-            url = "/pages/browse/module/module?id=" + id + "&moduleName=" + title;
-        } else {
-            url = "/pages/coming/coming";
-        }
-
-        console.log(url);
-
-
-        wx.navigateTo({
-            url: url
         })
     },
 
@@ -77,6 +55,8 @@ Page({
         });
 
         console.log("Modules: ", modules);
+        //TODO: check current module
+        // console.log("CAONTAINS:", this.data.modules[0].id.toString().contains('SH'));
     },
 
     bindGetUserInfo: function (e) {
@@ -92,29 +72,29 @@ Page({
         console.log(++count);
         // return a promise
         server.login().then((response) => {
-          console.log(response);
+            console.log(response);
         });
         server.getCities().then((response) => {
-          console.log(response);
+            console.log("server.getCities: ", response);
         })
-        server.getModules().then((response) => {
-          console.log(response);
+        server.getModules("2").then((response) => {
+            console.log("server.getModules: ", response);
         })
         app.editTabBar();
 
 
-        wx.getSetting({
-            success: function (res) {
-                if (res.authSetting['scope.userInfo']) {
-                    // Authorized. "getUserInfo" can be directly called to retrieve profile photo/nickname
-                    wx.getUserInfo({
-                        success: function (res) {
-                            console.log("res.userInfo: ", res.userInfo)
-                        }
-                    })
-                }
-            }
-        });
+        // wx.getSetting({
+        //     success: function (res) {
+        //         if (res.authSetting['scope.userInfo']) {
+        //             // Authorized. "getUserInfo" can be directly called to retrieve profile photo/nickname
+        //             wx.getUserInfo({
+        //                 success: function (res) {
+        //                     console.log("res.userInfo: ", res.userInfo)
+        //                 }
+        //             })
+        //         }
+        //     }
+        // });
 
         console.log("canIUse: ", this.data.canIUse);
 

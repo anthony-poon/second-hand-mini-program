@@ -5,13 +5,14 @@
     "pages/logs/logs",
     "pages/browse/module/module",
     "pages/browse/storefront/storefront",
+    "pages/browse/productList/productList",
     "pages/browse/product/product",
+    "pages/browse/coming/coming",
     "pages/publish/publish",
     "pages/publish/main/main",
     "pages/publish/myProductList/myProductList",
     "pages/publish/myProduct/myProduct",
-    "pages/user/user",
-    "pages/coming/coming"
+    "pages/user/user"
   ],
   "window": {
     "backgroundTextStyle": "light",

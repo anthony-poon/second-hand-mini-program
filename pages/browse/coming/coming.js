@@ -1,4 +1,3 @@
-// pages/coming/coming.js
 
 const app = getApp();
 

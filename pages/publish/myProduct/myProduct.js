@@ -12,7 +12,8 @@ Page({
     data: {
         productId: "",
         productDetails: {},
-        wordCount: 0
+        wordCount: 0,
+        requestDto: {}
     },
 
     getMyProductDetails: function (productId) {
@@ -32,6 +33,7 @@ Page({
             delta: 1,
             success: that.toastOnUpdateSuccess
         });
+        console.log(this.data.requestDto);
     },
 
     cancelEdit: function (e) {
@@ -40,12 +42,30 @@ Page({
         });
     },
 
+    titleChange: function (e) {
+
+        this.setData({
+            "requestDto.title": e.detail.value
+        });
+    },
+
     descChange: function (e) {
 
         this.setData({
-            wordCount: e.detail.value.length
+            wordCount: e.detail.value.length,
+            "requestDto.desc": e.detail.value
         });
+    },
 
+    priceChange: function (e) {
+
+        this.setData({
+            "requestDto.price": e.detail.value
+        });
+    },
+
+    inputChange: function(e) {
+        console.log(e);
     },
 
     toastOnUpdateSuccess: function() {

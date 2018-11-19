@@ -1,11 +1,7 @@
-<!--pages/coming/coming.wxml-->
-
-
 <view class="page__bd">
-    <view class="page__bd_spacing">.
+    <view class="page__bd_spacing">
         <view class="container">
-            <text>pages/coming/coming.wxml</text>
-            <text>Under Construction</text>
+            <text>该功能即将开放 :)</text>
         </view>
     </view>
 

@@ -11,7 +11,9 @@
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
                 <view class="weui-cell__bd">
-                    <input class="weui-input" value="{{productDetails.title.value}}"/>
+                    <input class="weui-input"
+                           bindinput="titleChange"
+                           value="{{productDetails.title.value}}"/>
                 </view>
             </view>
         </view>
@@ -32,18 +34,23 @@
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
                 <view class="weui-cell__bd">
-                    <input class="weui-input" value="{{productDetails.price.value}}"/>
+                    <input class="weui-input"
+                           bindinput="priceChange"
+                           value="{{productDetails.price.value}}"/>
                 </view>
             </view>
         </view>
 
         <block wx:for="{{productDetails.attr}}" wx:for-item="item" wx:key="*this">
-            <block wx-if="{{item.editable}}">
+            <block wx-if="{{item.key != 'visitCount'}}">
                 <view class="weui-cells__title">{{item.label}}</view>
                 <view class="weui-cells weui-cells_after-title">
                     <view class="weui-cell">
                         <view class="weui-cell__bd">
-                            <input class="weui-input" value="{{item.value}}"/>
+                            <input class="weui-input"
+                                   bindinput="inputChange"
+                                   value="{{item.value}}"
+                                   data-key="{{item.key}}"/>
                         </view>
                     </view>
                 </view>

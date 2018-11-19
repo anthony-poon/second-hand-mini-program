@@ -48,6 +48,8 @@ App({
         var _curPageArr = getCurrentPages();
         var _curPage = _curPageArr[_curPageArr.length - 1];
         var _pagePath = _curPage.__route__;
+        this.globalData.currPage = _curPage;
+        console.log("global currPage:", this.globalData.currPage.route.toString());
 
         if (_pagePath.indexOf('/') != 0) {
             _pagePath = '/' + _pagePath;
@@ -73,13 +75,14 @@ App({
     globalData: {
         userInfo: null,
         userID: "temp",
+        currPage: "",
         tabBar: {
             color: "#a9b7b7",
             selectedColor: "#ff8124",
             borderStyle: "white",
             list: [{
-                selectedIconPath: "/images/ing-active.png",
-                iconPath: "/images/ing.png",
+                selectedIconPath: "/images/main_tab_active.png",
+                iconPath: "/images/main_tab.png",
                 pagePath: "/pages/browse/main/main",
                 text: "首页",
                 class: "menu-item",
@@ -87,8 +90,8 @@ App({
                 root: "/pages/browse/"
             },
                 {
-                    selectedIconPath: "/images/coming-active.png",
-                    iconPath: "/images/coming.png",
+                    selectedIconPath: "/images/publish-tab-active.png",
+                    iconPath: "/images/publish-tab.png",
                     pagePath: "/pages/publish/main/main",
                     text: "发布",
                     class: "menu-item",
@@ -96,8 +99,8 @@ App({
                     root: "/pages/publish/"
                 },
                 {
-                    selectedIconPath: "/images/coming-active.png",
-                    iconPath: "/images/coming.png",
+                    selectedIconPath: "/images/me-tab-active.png",
+                    iconPath: "/images/me-tab.png",
                     pagePath: "/pages/user/user",
                     text: "我的",
                     class: "menu-item",

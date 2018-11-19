@@ -12,12 +12,12 @@ export var main_cities_data = [
 ];
 
 export var main_page_modules = [
-    {"id": "M1", "title": "二手交易", "sf": true, "img": "/images/nothing.png"},
-    {"id": "M2", "title": "房屋转让", "sf": false, "img": "/images/nothing.png"},
-    {"id": "M3", "title": "票务转让", "sf": false, "img": "/images/nothing.png"},
-    {"id": "M4", "title": "......", "sf": false, "img": "/images/nothing.png"},
-    {"id": "M4", "title": "......", "sf": false, "img": "/images/nothing.png"},
-    {"id": "M4", "title": "......", "sf": false, "img": "/images/nothing.png"},
+    {"id": "SH", "title": "二手交易", "img": "/images/nothing.png"},
+    {"id": "HE", "title": "房屋转让", "img": "/images/nothing.png"},
+    {"id": "TE", "title": "票务转让", "img": "/images/nothing.png"},
+    {"id": "NA", "title": "......", "img": "/images/nothing.png"},
+    {"id": "NA", "title": "......", "img": "/images/nothing.png"},
+    {"id": "NA", "title": "......", "img": "/images/nothing.png"},
 ];
 
 export var second_hand_module_storefronts = [
@@ -42,22 +42,22 @@ export var second_hand_product_details =
 export function getProductListByModuleOrStoreId(id) {
     switch (id) {
         case "SF_0001":
-            return Array.of(myM1ProductList[0]);
+            return Array.of(mySHProductList[0]);
         case "SF_0002":
-            return Array.of(myM1ProductList[1]);
+            return Array.of(mySHProductList[1]);
         case "SF_0003":
-            return Array.of(myM1ProductList[2]);
-        case "M2":
-            return myM2ProductList;
-        case "M3":
-            return myM3ProductList;
+            return Array.of(mySHProductList[2]);
+        case "HE":
+            return myHEProductList;
+        case "TE":
+            return myTEProductList;
         default:
             return null;
     }
 }
 
 export function getMyProductDetailsByProductId(productId) {
-    let longList = myM1ProductList.concat(myM2ProductList).concat(myM3ProductList);
+    let longList = mySHProductList.concat(myHEProductList).concat(myTEProductList);
     let res = {};
     longList.forEach(function (p) {
         if (p.id == productId) res = p;
@@ -68,19 +68,19 @@ export function getMyProductDetailsByProductId(productId) {
 export function getMyProductListByModuleId(moduleId) {
     switch (moduleId) {
         case "1":
-            return myM1ProductList;
+            return mySHProductList;
         case "2":
-            return myM2ProductList;
+            return myHEProductList;
         case "3":
-            return myM3ProductList;
+            return myTEProductList;
         default:
             return null;
     }
 };
 
-let myM1ProductList = [
+let mySHProductList = [
     {
-        "id": "M1_0001",
+        "id": "SH_0001",
         "traded": false,
         "title": {
             "label": "商品",
@@ -96,16 +96,20 @@ let myM1ProductList = [
         },
         "attr": [
             {
+                "key": "visitCount",
                 "label": "浏览量",
-                "type": "NUMBER",
-                "editable": false,
                 "value": "1231"
+            },
+            {
+                "key": "wechatId",
+                "label": "微信號",
+                "value": "some_person_123"
             }
         ],
         "img": ["/images/iphone_7_plus.jpg", "/images/iphone_7_plus_2.jpg", "/images/iphone_7_plus_3.jpg"]
     },
     {
-        "id": "M1_0002",
+        "id": "SH_0002",
         "traded": false,
         "title": {
             "label": "商品",
@@ -121,16 +125,20 @@ let myM1ProductList = [
         },
         "attr": [
             {
+                "key": "visitCount",
                 "label": "浏览量",
-                "type": "NUMBER",
-                "editable": false,
                 "value": "5523"
+            },
+            {
+                "key": "wechatId",
+                "label": "微信號",
+                "value": "some_person_123"
             }
         ],
         "img": ["/images/iphone_8_plus.jpg", "/images/iphone_8_plus_2.jpg"]
     },
     {
-        "id": "M1_0003",
+        "id": "SH_0003",
         "traded": false,
         "title": {
             "label": "商品",
@@ -146,19 +154,23 @@ let myM1ProductList = [
         },
         "attr": [
             {
+                "key": "visitCount",
                 "label": "浏览量",
-                "type": "NUMBER",
-                "editable": false,
                 "value": "9999"
+            },
+            {
+                "key": "wechatId",
+                "label": "微信號",
+                "value": "some_person_123"
             }
         ],
         "img": ["/images/iphone_x.jpg"]
     }
 ];
 
-let myM2ProductList = [
+let myHEProductList = [
     {
-        "id": "M2_0001",
+        "id": "HE_0001",
         "traded": false,
         "title": {
             "label": "名称",
@@ -174,35 +186,35 @@ let myM2ProductList = [
         },
         "attr": [
             {
+                "key": "location",
                 "label": "位置",
-                "type": "STRING",
-                "editable": true,
                 "value": "1, Star Street, London"
             },
             {
+                "key": "houseType",
                 "label": "房型",
-                "type": "STRING",
-                "editable": true,
                 "value": "Studio"
             },
             {
+                "key": "duration",
                 "label": "时长",
-                "type": "STRING",
-                "editable": true,
                 "value": "3 months"
             },
             {
+                "key": "wechatId",
                 "label": "微信號",
-                "type": "WECHAT_ID",
-                "editable": true,
                 "value": "some_person_123"
             },
-
+            {
+                "key": "visitCount",
+                "label": "浏览量",
+                "value": "9999"
+            },
         ],
         "img": ["/images/house_001_1.jpg"]
     },
     {
-        "id": "M2_0002",
+        "id": "HE_0002",
         "traded": false,
         "title": {
             "label": "名称",
@@ -218,35 +230,36 @@ let myM2ProductList = [
         },
         "attr": [
             {
+                "key": "location",
                 "label": "位置",
-                "type": "STRING",
-                "editable": true,
                 "value": "2, Star Street, London"
             },
             {
+                "key": "houseType",
                 "label": "房型",
-                "type": "STRING",
-                "editable": true,
                 "value": "Ensuite"
             },
             {
+                "key": "duration",
                 "label": "时长",
-                "type": "STRING",
-                "editable": true,
                 "value": "6 months"
             },
             {
+                "key": "wechatId",
                 "label": "微信號",
                 "type": "WECHAT_ID",
-                "editable": true,
                 "value": "some_person_123"
             },
-
+            {
+                "key": "visitCount",
+                "label": "浏览量",
+                "value": "9999"
+            }
         ],
-        "img": ["/images/house_002_1.jpg", "/images/house_002_2.jpg", "/images/house_002_3.jpg", "/images/house_002_4.jpg"]
+        "img": ["/images/house_002_1.jpg"]
     },
     {
-        "id": "M2_0003",
+        "id": "HE_0003",
         "traded": false,
         "title": {
             "label": "名称",
@@ -262,35 +275,36 @@ let myM2ProductList = [
         },
         "attr": [
             {
+                "key": "location",
                 "label": "位置",
-                "type": "STRING",
-                "editable": true,
                 "value": "3, Star Street, London"
             },
             {
+                "key": "houseType",
                 "label": "房型",
-                "type": "STRING",
-                "editable": true,
                 "value": "House"
             },
             {
+                "key": "duration",
                 "label": "时长",
-                "type": "STRING",
-                "editable": true,
                 "value": "12 months"
             },
             {
+                "key": "wechatId",
                 "label": "微信號",
                 "type": "WECHAT_ID",
-                "editable": true,
                 "value": "some_person_123"
             },
-
+            {
+                "key": "visitCount",
+                "label": "浏览量",
+                "value": "9999"
+            }
         ],
-        "img": ["/images/house_003_1.jpg", "/images/house_003_2.jpg"]
+        "img": ["/images/house_003_1.jpg"]
     },
     {
-        "id": "M2_0004",
+        "id": "HE_0004",
         "traded": false,
         "title": {
             "label": "名称",
@@ -306,39 +320,40 @@ let myM2ProductList = [
         },
         "attr": [
             {
+                "key": "location",
                 "label": "位置",
-                "type": "STRING",
-                "editable": true,
                 "value": "4, Star Street, London"
             },
             {
+                "key": "houseType",
                 "label": "房型",
-                "type": "STRING",
-                "editable": true,
                 "value": "Apartment"
             },
             {
+                "key": "duration",
                 "label": "时长",
-                "type": "STRING",
-                "editable": true,
                 "value": "24 months"
             },
             {
+                "key": "wechatId",
                 "label": "微信號",
                 "type": "WECHAT_ID",
-                "editable": true,
                 "value": "some_person_123"
             },
-
+            {
+                "key": "visitCount",
+                "label": "浏览量",
+                "value": "9999"
+            }
         ],
-        "img": ["/images/house_004_1.jpg", "/images/house_004_2.jpg"]
+        "img": ["/images/house_004_1.jpg"]
     },
 
 ];
 
-let myM3ProductList = [
+let myTEProductList = [
     {
-        "id": "M3_0001",
+        "id": "TE_0001",
         "traded": false,
         "title": {
             "label": "名称",
@@ -354,22 +369,25 @@ let myM3ProductList = [
         },
         "attr": [
             {
+                "key": "effectiveData",
                 "label": "有效期",
-                "type": "DATE",
-                "editable": true,
                 "value": "30-05-2018"
             },
             {
+                "key": "wechatId",
                 "label": "微信號",
-                "type": "WECHAT_ID",
-                "editable": true,
                 "value": "some_person_123"
+            },
+            {
+                "key": "visitCount",
+                "label": "浏览量",
+                "value": "9999"
             }
         ],
         "img": []
     },
     {
-        "id": "M3_0002",
+        "id": "TE_0002",
         "traded": false,
         "title": {
             "label": "名称",
@@ -385,16 +403,19 @@ let myM3ProductList = [
         },
         "attr": [
             {
+                "key": "effectiveData",
                 "label": "有效期",
-                "type": "DATE",
-                "editable": true,
                 "value": "30-10-2018"
             },
             {
+                "key": "wechatId",
                 "label": "微信號",
-                "type": "WECHAT_ID",
-                "editable": true,
                 "value": "some_person_123"
+            },
+            {
+                "key": "visitCount",
+                "label": "浏览量",
+                "value": "9999"
             }
         ],
         "img": []
