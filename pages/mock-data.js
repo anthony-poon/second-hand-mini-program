@@ -256,7 +256,8 @@ let myHEProductList = [
                 "value": "9999"
             }
         ],
-        "img": ["/images/house_002_1.jpg"]
+        "img": ["/images/house_002_1.jpg", "/images/house_002_2.jpg",
+            "/images/house_002_3.jpg", "/images/house_002_4.jpg"]
     },
     {
         "id": "HE_0003",
@@ -301,7 +302,7 @@ let myHEProductList = [
                 "value": "9999"
             }
         ],
-        "img": ["/images/house_003_1.jpg"]
+        "img": ["/images/house_003_1.jpg", "/images/house_003_2.jpg"]
     },
     {
         "id": "HE_0004",
@@ -346,7 +347,7 @@ let myHEProductList = [
                 "value": "9999"
             }
         ],
-        "img": ["/images/house_004_1.jpg"]
+        "img": ["/images/house_004_1.jpg", "/images/house_004_2.jpg"]
     },
 
 ];
