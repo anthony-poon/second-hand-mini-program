@@ -1,48 +1,50 @@
 // GET list of cities
 export var cities = [
-    {'id': 'LON', 'name': '伦敦'},
-    {'id': 'LEE', 'name': '利兹'},
-    {'id': 'SHE', 'name': '谢菲尔德'},
-    {'id': 'SOU', 'name': '南安普顿'},
-    {'id': 'LOU', 'name': '拉夫堡'},
-    {'id': 'BIR', 'name': '伯明翰'},
-    {'id': 'NOT', 'name': '诺丁汉'},
-    {'id': 'LIV', 'name': '利物浦'},
-    {'id': 'CAM', 'name': '剑桥'},
-    {'id': 'OXF', 'name': '牛津'},
-    {'id': 'MAN', 'name': '曼彻斯特'},
-    {'id': 'NEW', 'name': '纽卡斯尔'},
-    {'id': 'GLA', 'name': '格拉斯哥'},
-    {'id': 'EDI', 'name': '爱丁堡'},
-    {'id': 'COV', 'name': '考文垂'},
-    {'id': 'LEI', 'name': '莱斯特'},
-    {'id': 'BAT', 'name': '巴斯'},
-    {'id': 'DUR', 'name': '杜伦'},
-    {'id': 'CAR', 'name': '卡迪夫'},
-    {'id': 'AND', 'name': '圣安德鲁斯'},
-    {'id': 'WAR', 'name': '华威'},
-    {'id': 'YOR', 'name': '约克'},
-    {'id': 'BRI', 'name': '布里斯托'}
+  { 'id': 1, 'short_str': 'LON', 'name': '伦敦' },
+  { 'id': 2, 'short_str': 'LEE', 'name': '利兹' },
+  { 'id': 3, 'short_str': 'SHE', 'name': '谢菲尔德' },
+  { 'id': 4, 'short_str': 'SOU', 'name': '南安普顿' },
+  { 'id': 5, 'short_str': 'LOU', 'name': '拉夫堡' },
+  { 'id': 6, 'short_str': 'BIR', 'name': '伯明翰' },
+  { 'id': 7, 'short_str': 'NOT', 'name': '诺丁汉' },
+  { 'id': 8, 'short_str': 'LIV', 'name': '利物浦' },
+  { 'id': 9, 'short_str': 'CAM', 'name': '剑桥' },
+  { 'id': 10, 'short_str': 'OXF', 'name': '牛津' },
+  { 'id': 11, 'short_str': 'MAN', 'name': '曼彻斯特' },
+  { 'id': 12, 'short_str': 'NEW', 'name': '纽卡斯尔' },
+  { 'id': 13, 'short_str': 'GLA', 'name': '格拉斯哥' },
+  { 'id': 14, 'short_str': 'EDI', 'name': '爱丁堡' },
+  { 'id': 15, 'short_str': 'COV', 'name': '考文垂' },
+  { 'id': 16, 'short_str': 'LEI', 'name': '莱斯特' },
+  { 'id': 17, 'short_str': 'BAT', 'name': '巴斯' },
+  { 'id': 18, 'short_str': 'DUR', 'name': '杜伦' },
+  { 'id': 19, 'short_str': 'CAR', 'name': '卡迪夫' },
+  { 'id': 20, 'short_str': 'AND', 'name': '圣安德鲁斯' },
+  { 'id': 21, 'short_str': 'WAR', 'name': '华威' },
+  { 'id': 22, 'short_str': 'YOR', 'name': '约克' },
+  { 'id': 23, 'short_str': 'BRI', 'name': '布里斯托' }
 ];
 
 // GET list of modules by cityId, e.g. 'LON'
 export var modules_of_london = [
-    {"id": "SEC", "name": "二手交易", "img": "/images/nothing.png"},
-    {"id": "HOU", "name": "房屋转让", "img": "/images/nothing.png"},
-    {"id": "TIC", "name": "票务转让", "img": "/images/nothing.png"}
+  { "id": 1, "location": "伦敦", "name": "二手交易", "img": "/images/nothing.png"},
+  { "id": 2, "location": "伦敦", "name": "房屋转让", "img": "/images/nothing.png"},
+  { "id": 3, "location": "伦敦", "name": "票务转让", "img": "/images/nothing.png"}
 ];
 
 export var second_hand_module_storefronts_of_london = [
-    {"id": "LONSECS0000001", "name": "ABC Co. Ltd.", "img": "/images/iphone_7_plus.jpg"},
-    {"id": "LONSECS0000002", "name": "DEF Co. Ltd.", "img": "/images/iphone_8_plus.jpg"},
-    {"id": "LONSECS0000003", "name": "GHI Co. Ltd.", "img": "/images/iphone_x.jpg"}
+  { "id": 1, "type": "SecondHandStoreFront", "location": "伦敦", "name": "ABC Co. Ltd.", "img": "/images/iphone_7_plus.jpg"},
+  { "id": 2, "type": "SecondHandStoreFront", "location": "伦敦", "name": "DEF Co. Ltd.", "img": "/images/iphone_8_plus.jpg"},
+  { "id": 3, "type": "SecondHandStoreFront", "location": "伦敦", "name": "GHI Co. Ltd.", "img": "/images/iphone_x.jpg"}
 ];
 
 
 
 let second_hand_storefront_items_of_london = [
     {
-        "id": "LONSECP0000001",
+        "id": 1,
+        "type": "SecondHandItem",
+        "location": "伦敦",
         "traded": false,
         "title":"iPhone 7 Plus",
         "desc": "Why buy iPhone 8 Plus with same specs?",
@@ -63,7 +65,9 @@ let second_hand_storefront_items_of_london = [
 
 let house_items_of_london = [
     {
-        "id": "LONHOUP0000001",
+        "id": 1,
+        "type": "HousingItem",
+        "location": "伦敦",
         "traded": false,
         "title": "Big Studio",
         "desc": "For Bachelor",
@@ -97,6 +101,8 @@ let house_items_of_london = [
 let ticket_items_of_london = [
     {
         "id": "LONTICP0000001",
+        "type": "TicketingItem",
+        "location": "伦敦",
         "traded": false,
         "title": "五月天 诺亚方舟 世界巡回演唱会",
         "desc": "五月天演唱会",
