@@ -15,7 +15,7 @@ const formatNumber = n => {
 }
 
 const server = {
-    baseUrl: "http://localhost:8000",
+    baseUrl: "http://wechat.anthonypoon.net",
     // return a promise
     defaultRetry: 5,
     _getWxData: () => {
@@ -140,7 +140,7 @@ const server = {
             method: "GET",
             success: (response) => {
               if (response.statusCode == 200) {
-                resolve(response);
+                resolve(response.data);
               } else {
                 reject(response);
               }
@@ -171,7 +171,7 @@ const server = {
             method: "GET",
             success: (response) => {
               if (response.statusCode == 200) {
-                resolve(response);
+                resolve(response.data);
               } else {
                 reject(response);
               }
@@ -196,19 +196,56 @@ const server = {
           var url = server.baseUrl + "/api/store-fronts";
           if (option.id) {
             url = url + "/" + option.id
+            wx.request({
+              url: url,
+              method: "GET",
+              success: (response) => {
+                if (response.statusCode == 200) {
+                  var rtn = [];
+                  response.data.forEach((storeItem) => {
+                    rtn.push({
+                      "id": storeItem.id,
+                      "type": storeItem.type,
+                      "location": storeItem.location,
+                      "traded": storeItem.isTraded,
+                      "title": storeItem.name,
+                      "desc": storeItem.description,
+                      "price": storeItem.price,
+                      "attr": [
+                        {
+                          "key": "visitCount",
+                          "value": storeItem.visitorCount,
+                        },
+                        {
+                          "key": "wechatId",
+                          "value": storeItem.openId,
+                        }
+                      ],
+                      "img": response.data.assets
+                    })
+                  })
+                  resolve(rtn);
+                } else {
+                  reject(response);
+                }
+              },
+              fail: reject
+            })
+          } else {
+            wx.request({
+              url: url,
+              method: "GET",
+              success: (response) => {
+                if (response.statusCode == 200) {
+                  resolve(response.data);
+                } else {
+                  reject(response);
+                }
+              },
+              fail: reject
+            })
           }
-          wx.request({
-            url: url,
-            method: "GET",
-            success: (response) => {
-              if (response.statusCode == 200) {
-                resolve(response);
-              } else {
-                reject(response);
-              }
-            },
-            fail: reject
-          })
+          
         });
       },
       doUpdate: (option = {}) => {
@@ -227,12 +264,17 @@ const server = {
         if (!option.data) {
           throw new Error("Missing Data Object");
         }
-        if (!option.moduleId && !option.storeFrontId) {
-          throw new Error("Missing module Id or store front Id")
+        var url = null;
+        if (option.storeFrontId) {
+          url = server.baseUrl + "/api/personal/store-items?storeFrontId=" + option.storeFrontId;
+        } if (option.moduleId) {
+          url = server.baseUrl + "/api/personal/store-items?storeFrontId=" + option.moduleId;
+        } else {
+          throw new Error("Missing moduleId or storeFrontId")
         }
         var id = option.storeFrontId || option.moduleId
         wx.request({
-          url: server.baseUrl + "/api/personal/store-items?id=" + id,
+          url: url,
           method: "POST",
           header: {
             "Cookie": "PHPSESSID="+option.sessionId,
@@ -240,7 +282,7 @@ const server = {
           data: option.data,
           success: (response) => {
             if (200 == response.statusCode) {
-              resolve(response)
+              resolve(response.data)
             } else {
               reject(response)
             }
@@ -252,9 +294,6 @@ const server = {
     doRead: (option = {}) => {
       return new Promise((resolve, reject) => {
         var url = server.baseUrl + "/api/store-items";
-        if (option.id) {
-          url = url + "/" + option.id
-        }
         if (option.module) {
           url = url + "?module=" + option.module;
         }
@@ -263,7 +302,7 @@ const server = {
           method: "GET",
           success: (response) => {
             if (response.statusCode == 200) {
-              resolve(response);
+              resolve(response.data);
             } else {
               reject(response);
             }
