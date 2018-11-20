@@ -66,13 +66,13 @@ Page({
       // return a promise
       
       server.cities.doRead().then((response) => {
-        console.log(response);
+        console.log("server.cities.doRead(): ", response);
       });
       server.modules.doRead().then((response) => {
-        console.log(response);
+        console.log("server.modules.doRead(): ", response);
       });
       server.storeFronts.doRead().then((response) => {
-        console.log(response);
+        console.log("server.storeFronts.doRead(): ", response);
       });
       // Unsupported yet
       // server.storeItems.doRead().then((response) => {
@@ -81,22 +81,22 @@ Page({
       server.cities.doRead({
         id: 2
       }).then((response) => {
-        console.log(response);
+        console.log("server.cities.doRead({id: 2}): ", response);
       });
       server.modules.doRead({
         id: 2
       }).then((response) => {
-        console.log(response);
+        console.log("server.modules.doRead({id: 2}): ", response);
       });
       server.storeFronts.doRead({
         id: 2
       }).then((response) => {
-        console.log(response);
+        console.log("server.storeFronts.doRead({id: 2}): ", response);
       });
       server.storeItems.doRead({
         "module": 49
       }).then((response) => {
-        console.log(response);
+        console.log("server.storeItems.doRead({module: 49}): ", response);
       });
     },
     /**

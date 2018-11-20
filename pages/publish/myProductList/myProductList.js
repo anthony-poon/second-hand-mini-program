@@ -92,7 +92,7 @@ Page({
     openCheer: function () {
         wx.showToast({
             title: '继续加油!',
-            image: '/images/like-solid.png',
+            image: '/images/like-hollow.png',
             duration: 1000
         });
     },
@@ -100,7 +100,7 @@ Page({
     openDeleted: function () {
         wx.showToast({
             title: '已删除',
-            image: '/images/delete-solid.png',
+            image: '/images/delete-hollow.png',
             duration: 1000
         });
     },
