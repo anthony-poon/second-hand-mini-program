@@ -62,7 +62,43 @@ Page({
     bindGetUserInfo: function (e) {
         console.log("e.detail.userInfo: ", e.detail.userInfo);
     },
-
+    demo: function() {
+      // return a promise
+      
+      server.cities.doRead().then((response) => {
+        console.log(response);
+      });
+      server.modules.doRead().then((response) => {
+        console.log(response);
+      });
+      server.storeFronts.doRead().then((response) => {
+        console.log(response);
+      });
+      // Unsupported yet
+      // server.storeItems.doRead().then((response) => {
+      //   console.log(response);
+      // });
+      server.cities.doRead({
+        id: 2
+      }).then((response) => {
+        console.log(response);
+      });
+      server.modules.doRead({
+        id: 2
+      }).then((response) => {
+        console.log(response);
+      });
+      server.storeFronts.doRead({
+        id: 2
+      }).then((response) => {
+        console.log(response);
+      });
+      server.storeItems.doRead({
+        "module": 49
+      }).then((response) => {
+        console.log(response);
+      });
+    },
     /**
      * Lifecycle function--Called when page load
      */
@@ -70,16 +106,7 @@ Page({
         // TODO: for counting redirect
         var count = 0;
         console.log(++count);
-        // return a promise
-        server.login().then((response) => {
-            console.log(response);
-        });
-        server.getCities().then((response) => {
-            console.log("server.getCities: ", response);
-        })
-        server.getModules("2").then((response) => {
-            console.log("server.getModules: ", response);
-        })
+        this.demo();
         app.editTabBar();
 
 
