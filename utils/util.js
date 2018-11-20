@@ -15,41 +15,48 @@ const formatNumber = n => {
 }
 
 const server = {
-    baseUrl: "http://wechat.anthonypoon.net",
+    baseUrl: "http://localhost:8000",
     // return a promise
     defaultRetry: 5,
-    login: function(retry) {
+    _getWxData: () => {
       // Perform 2 promise, pass all response to resolve as array
+      return Promise.all([
+        new Promise(function (resolve, reject) {
+          wx.login({
+            success: (response) => {
+              resolve(response.code)
+            },
+            fail: reject
+          })
+        }),
+        new Promise(function (resolve, reject) {
+          wx.getUserInfo({
+            withCredentials: true,
+            success: (response) => {
+              resolve({
+                encrypted: response.encryptedData,
+                iv: response.iv
+              })
+            },
+            fail: reject
+          })
+        })
+      ])
+    },
+    login: function(retry) {
       if (retry == undefined) {
         retry = this.defaultRetry;
       }
-      var p = Promise.all([
-          new Promise(function (resolve, reject) {
-              wx.login({
-                  success: resolve,
-                  fail: reject
-              })
-          }),
-          new Promise(function (resolve, reject) {
-              wx.getUserInfo({
-                  withCredentials: true,
-                  success: resolve,
-                  fail: reject
-              })
-          })
-      ]).then((wxData) => {
+      return server._getWxData().then((wxData) => {
         // Gather all needed info and login
         return new Promise((resolve, reject) => {
-          var code = wxData[0].code;
-          var encrypted = wxData[1].encryptedData
-          var iv = wxData[1].iv
           wx.request({
             url: server.baseUrl + "/api/security/login",
             method: "POST",
             data: {
-              code: code,
-              encrypted: encrypted,
-              iv: iv
+              code: wxData[0],
+              encrypted: wxData[1].encrypted,
+              iv: wxData[1].iv
             },
             success: (response) => {
               var loginOK = (response.statusCode == 200)
@@ -67,7 +74,7 @@ const server = {
                   // Cannot be chained for some reason. Need to be fixed later
                   reject(response)
                 } else {
-                  return this.login(retry - 1);
+                  this.login(retry - 1).then(resolve);
                 }
               }
             },
@@ -77,7 +84,46 @@ const server = {
           })
         })
       })
-      return p;
+    },
+    mockLogin: function (mockOpenId, retry) {
+      if (retry == undefined) {
+        retry = this.defaultRetry;
+      }
+      return server._getWxData().then((wxData) => {
+        // Gather all needed info and login
+        return new Promise((resolve, reject) => {
+          wx.request({
+            url: server.baseUrl + "/api/security/login",
+            method: "POST",
+            header: {
+              Authorization: mockOpenId,
+            },
+            success: (response) => {
+              var loginOK = (response.statusCode == 200)
+              if (loginOK) {
+                var token = {
+                  sessionId: response.data.sessionId,
+                  userId: response.data.user.id,
+                  nickName: response.data.user.fullName,
+                  openId: response.data.user.openId,
+                }
+                resolve(token)
+              } else {
+                console.log(retry);
+                if (retry <= 0) {
+                  // Cannot be chained for some reason. Need to be fixed later
+                  reject(response)
+                } else {
+                  this.login(retry - 1).then(resolve);
+                }
+              }
+            },
+            fail: (response) => {
+              throw new Error("Unable to get connect to backend server")
+            }
+          })
+        })
+      })
     },
     cities: {
       doCreate: (option = {}) => {
@@ -174,7 +220,34 @@ const server = {
     },
   storeItems: {
     doCreate: (option = {}) => {
-      throw new Error("Unsupported method");
+      return new Promise((resolve, reject) => {
+        if (!option.sessionId) {
+          throw new Error("Missing Session Id");
+        }
+        if (!option.data) {
+          throw new Error("Missing Data Object");
+        }
+        if (!option.moduleId && !option.storeFrontId) {
+          throw new Error("Missing module Id or store front Id")
+        }
+        var id = option.storeFrontId || option.moduleId
+        wx.request({
+          url: server.baseUrl + "/api/personal/store-items?id=" + id,
+          method: "POST",
+          header: {
+            "Cookie": "PHPSESSID="+option.sessionId,
+          },
+          data: option.data,
+          success: (response) => {
+            if (200 == response.statusCode) {
+              resolve(response)
+            } else {
+              reject(response)
+            }
+          },
+          fail: reject
+        })
+      })
     },
     doRead: (option = {}) => {
       return new Promise((resolve, reject) => {
@@ -205,6 +278,48 @@ const server = {
     doDelete: (option = {}) => {
       throw new Error("Unsupported method");
     },
+    assets: {
+      doCreate: (option = {}) => {
+        if (!option.sessionId) {
+          throw new Error("Missing Session Id");
+        }
+        if (!option.images) {
+          throw new Error("Missing Data Object");
+        }
+        if (!option.storeItemId) {
+          throw new Error("Missing store item Id")
+        }
+        if (option.images) {
+          var upload = (path) => {
+            return new Promise((res, rej) => {
+              wx.uploadFile({
+                url: server.baseUrl + '/api/personal/store-items/' + option.storeItemId + "/assets",
+                filePath: path,
+                name: 'image.png',
+                header: {
+                  "Cookie": "PHPSESSID=" + option.sessionId,
+                },
+                success: (response) => {
+                  if (200 == response.statusCode) {
+                    res(response);
+                  } else {
+                    rej(response);
+                  }
+                },
+                fail: rej
+              })
+            });
+          }
+          var promises = [];
+          option.images.forEach((imagePath) => {
+            promises.push(upload(imagePath));
+          })
+          return Promise.all(promises).then((response) => {
+            resolve(response)
+          });
+        }
+      }
+    }
   }
 }
 

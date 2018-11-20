@@ -63,8 +63,45 @@ Page({
         console.log("e.detail.userInfo: ", e.detail.userInfo);
     },
     demo: function() {
-      // return a promise
-      
+      // Demo login then post item
+      server.mockLogin("mock_user_1").then((response) => {
+        var sessionId = response.sessionId;
+        var storeFrontId = 1;
+        wx.chooseImage({
+          success: function(res) {
+            var paths = res.tempFilePaths;
+            server.storeItems.doCreate({
+              sessionId: sessionId,
+              storeFrontId: storeFrontId,
+              data: {
+                name: "_demo_item",
+                price: 100.0,
+                description: "This is a demo",
+              }              
+            }).then((res) => {
+              console.log(res);
+              server.storeItems.assets.doCreate({
+                sessionId: sessionId,
+                storeItemId: res.data.id,
+                // Must be array
+                images: paths
+              })
+            }).catch((res) => {
+              console.log(res);
+            });
+          },
+        })
+        
+        // server.personal.createItem({
+        //   sessionId: response.sessionId,
+        //   moduleId: 1,
+        //   data: {
+        //     name: "_demo_item",
+        //     price: 100.0,
+        //     description: "This is a demo",
+        //   }
+        // })
+      });
       server.cities.doRead().then((response) => {
         console.log(response);
       });
@@ -89,7 +126,7 @@ Page({
         console.log(response);
       });
       server.storeFronts.doRead({
-        id: 2
+        id: 1
       }).then((response) => {
         console.log(response);
       });
