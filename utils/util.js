@@ -15,7 +15,7 @@ const formatNumber = n => {
 }
 
 const server = {
-    baseUrl: "http://localhost:8000",
+    baseUrl: "http://wechat.anthonypoon.net",
     // return a promise
     defaultRetry: 5,
     login: function(retry) {
