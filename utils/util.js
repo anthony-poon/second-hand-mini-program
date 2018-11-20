@@ -15,9 +15,68 @@ const formatNumber = n => {
 }
 
 const server = {
-    baseUrl: "http://wechat.anthonypoon.net",
+    baseUrl: "http://localhost:8000",
     // return a promise
     defaultRetry: 5,
+    _parseStoreItem: (storeItem) => {
+      console.log(storeItem);
+      var viewData = {
+        "id": storeItem.id,
+        "type": storeItem.type,
+        "location": storeItem.location,
+        "traded": storeItem.isTraded,
+        "title": storeItem.name,
+        "desc": storeItem.description,
+        "price": storeItem.price,
+        "img": storeItem.assets,
+        "attr": []
+      }
+      switch (storeItem.type) {
+        case "SecondHandItem":
+          viewData.attr.push({
+            "key": "visitCount",
+            "value": storeItem.visitorCount,
+          })
+          viewData.attr.push({
+            "key": "wechatId",
+            "value": storeItem.openId,
+          })
+          break;
+        case "HousingItem":
+          viewData.attr.push({
+            "key": "houseType",
+            "value": storeItem.propertyType,
+          })
+          viewData.attr.push({
+            "key": "duration",
+            "value": storeItem.durationDay,
+          })
+          viewData.attr.push({
+            "key": "wechatId",
+            "value": storeItem.openId,
+          })
+          viewData.attr.push({
+            "key": "visitCount",
+            "value": storeItem.visitorCount,
+          })
+          break;
+        case "TicketingItem":
+          viewData.attr.push({
+            "key": "effectiveDate",
+            "value": storeItem.validTill,
+          })
+          viewData.attr.push({
+            "key": "wechatId",
+            "value": storeItem.openId,
+          })
+          viewData.attr.push({
+            "key": "visitCount",
+            "value": storeItem.visitorCount,
+          })
+          break;
+      }
+      return viewData;
+    },
     _getWxData: () => {
       // Perform 2 promise, pass all response to resolve as array
       return Promise.all([
@@ -203,26 +262,7 @@ const server = {
                 if (response.statusCode == 200) {
                   var rtn = [];
                   response.data.forEach((storeItem) => {
-                    rtn.push({
-                      "id": storeItem.id,
-                      "type": storeItem.type,
-                      "location": storeItem.location,
-                      "traded": storeItem.isTraded,
-                      "title": storeItem.name,
-                      "desc": storeItem.description,
-                      "price": storeItem.price,
-                      "attr": [
-                        {
-                          "key": "visitCount",
-                          "value": storeItem.visitorCount,
-                        },
-                        {
-                          "key": "wechatId",
-                          "value": storeItem.openId,
-                        }
-                      ],
-                      "img": response.data.assets
-                    })
+                    rtn.push(server._parseStoreItem(storeItem));
                   })
                   resolve(rtn);
                 } else {
@@ -268,7 +308,7 @@ const server = {
         if (option.storeFrontId) {
           url = server.baseUrl + "/api/personal/store-items?storeFrontId=" + option.storeFrontId;
         } if (option.moduleId) {
-          url = server.baseUrl + "/api/personal/store-items?storeFrontId=" + option.moduleId;
+          url = server.baseUrl + "/api/personal/store-items?moduleId=" + option.moduleId;
         } else {
           throw new Error("Missing moduleId or storeFrontId")
         }
@@ -302,7 +342,11 @@ const server = {
           method: "GET",
           success: (response) => {
             if (response.statusCode == 200) {
-              resolve(response.data);
+              var rtn = []
+              response.data.forEach((storeItem) => {
+                rtn.push(server._parseStoreItem(storeItem));
+              })
+              resolve(rtn);
             } else {
               reject(response);
             }
