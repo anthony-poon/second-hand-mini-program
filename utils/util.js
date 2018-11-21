@@ -15,11 +15,10 @@ const formatNumber = n => {
 }
 
 const server = {
-    baseUrl: "http://wechat.anthonypoon.net:8000",
+    baseUrl: "http://wechat.anthonypoon.net",
     // return a promise
     defaultRetry: 5,
     _parseStoreItem: (storeItem) => {
-      console.log(storeItem);
       var viewData = {
         "id": storeItem.id,
         "type": storeItem.type,
@@ -307,7 +306,7 @@ const server = {
         var url = null;
         if (option.storeFrontId) {
           url = server.baseUrl + "/api/personal/store-items?storeFrontId=" + option.storeFrontId;
-        } if (option.moduleId) {
+        } else if (option.moduleId) {
           url = server.baseUrl + "/api/personal/store-items?moduleId=" + option.moduleId;
         } else {
           throw new Error("Missing moduleId or storeFrontId")

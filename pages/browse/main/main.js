@@ -63,13 +63,17 @@ Page({
         console.log("e.detail.userInfo: ", e.detail.userInfo);
     },
     demo: function() {
-      // Demo login then post item
+      // Demo login then post item, Uncomment to do post
+      // Need to create item first then post image
       // server.mockLogin("mock_user_1").then((response) => {
+      //   // save the session id for later use
       //   var sessionId = response.sessionId;
       //   var storeFrontId = 1;
+      //   // First Pick Image
       //   wx.chooseImage({
       //     success: function(res) {
       //       var paths = res.tempFilePaths;
+      //       // Create Item first
       //       server.storeItems.doCreate({
       //         sessionId: sessionId,
       //         storeFrontId: storeFrontId,
@@ -79,10 +83,10 @@ Page({
       //           description: "This is a demo",
       //         }              
       //       }).then((res) => {
-      //         console.log(res);
+      //         // Upload image after
       //         server.storeItems.assets.doCreate({
       //           sessionId: sessionId,
-      //           storeItemId: res.data.id,
+      //           storeItemId: res.id,
       //           // Must be array
       //           images: paths
       //         })
