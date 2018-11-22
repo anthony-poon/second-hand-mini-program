@@ -15,7 +15,7 @@ const formatNumber = n => {
 }
 
 const server = {
-    baseUrl: "http://wechat.anthonypoon.net",
+  baseUrl: "http://wechat.anthonypoon.net",
     // return a promise
     defaultRetry: 5,
     _parseStoreItem: (storeItem) => {
@@ -305,9 +305,9 @@ const server = {
         }
         var url = null;
         if (option.storeFrontId) {
-          url = server.baseUrl + "/api/personal/store-items?storeFrontId=" + option.storeFrontId;
+          url = server.baseUrl + "/api/store-fronts/" + option.storeFrontId + "/store-items";
         } else if (option.moduleId) {
-          url = server.baseUrl + "/api/personal/store-items?moduleId=" + option.moduleId;
+          url = server.baseUrl + "/api/modules/" + option.moduleId + "/store-items"
         } else {
           throw new Error("Missing moduleId or storeFrontId")
         }
@@ -375,8 +375,9 @@ const server = {
           var upload = (path) => {
             return new Promise((res, rej) => {
               wx.uploadFile({
-                url: server.baseUrl + '/api/personal/store-items/' + option.storeItemId + "/assets",
+                url: server.baseUrl + '/api/store-items/' + option.storeItemId + "/assets",
                 filePath: path,
+                method: "POST",
                 name: 'image.png',
                 header: {
                   "Cookie": "PHPSESSID=" + option.sessionId,
@@ -396,9 +397,7 @@ const server = {
           option.images.forEach((imagePath) => {
             promises.push(upload(imagePath));
           })
-          return Promise.all(promises).then((response) => {
-            resolve(response)
-          });
+          return Promise.all(promises);
         }
       }
     }

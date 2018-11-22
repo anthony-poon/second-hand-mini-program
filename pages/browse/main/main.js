@@ -65,10 +65,10 @@ Page({
     demo: function() {
       // Demo login then post item, Uncomment to do post
       // Need to create item first then post image
-      // server.mockLogin("mock_user_1").then((response) => {
+      // server.mockLogin("mock_user_2").then((response) => {
       //   // save the session id for later use
       //   var sessionId = response.sessionId;
-      //   var storeFrontId = 1;
+      //   var moduleId = 1;
       //   // First Pick Image
       //   wx.chooseImage({
       //     success: function(res) {
@@ -76,7 +76,7 @@ Page({
       //       // Create Item first
       //       server.storeItems.doCreate({
       //         sessionId: sessionId,
-      //         storeFrontId: storeFrontId,
+      //         moduleId: moduleId,
       //         data: {
       //           name: "_demo_item",
       //           price: 100.0,
